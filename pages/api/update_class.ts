@@ -31,14 +31,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           `, '')
         } else {
           const [rows, fields] = await conn.query(`
-          insert into class (class_time, class_title, class_url)
-          values (${class_time}, '${class_title}', '${class_url}');
+          insert into class (class_time, class_title, class_url, account_id)
+          values (${class_time}, '${class_title}', '${class_url}', '${session.user?.email}');
           `, '')
         }
         
-        res.status(200)
+        res.status(200).json({ message: 'Updated class data' })
       } catch (e) {
-        res.status(500).json({ message: 'An error occurred while connecting to the database' })
+        res.status(500).json({ message: String(e) })
       }
 
       break

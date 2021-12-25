@@ -24,7 +24,7 @@ const Home: NextPage = () => {
         <div>
           {data.map((classData, index) => {
             return (
-              <ClassCard classData={classData} key={classData?.class_url ? classData.class_url : index} />
+              <ClassCard classData={classData} class_time={index} key={classData?.class_url ? classData.class_url : index} />
             )
           })}
         </div>
