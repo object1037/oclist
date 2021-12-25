@@ -14,7 +14,7 @@ export default NextAuth({
   secret: process.env.NEXTAUTH_SECRET,
   events: {
     async signIn(message) {
-      await axios.post('/api/create-account', {
+      await axios.post('./create-account', {
         account: message.user
       })
     },
