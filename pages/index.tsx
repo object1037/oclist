@@ -3,7 +3,7 @@ import Head from 'next/head'
 import ClassCard from '../components/classCard'
 import { classes } from '../test'
 import axios from 'axios'
-import { signIn } from "next-auth/react"
+import { signIn, signOut } from "next-auth/react"
 
 const Home: NextPage = () => {
   async function clickHandler() {
@@ -19,6 +19,7 @@ const Home: NextPage = () => {
     </Head>
     <main>
       <button onClick={() => signIn()}>Sign in</button>
+      <button onClick={() => signOut()}>Sign out</button>
       <button onClick={() => clickHandler()}>aaa</button>
       <div>
       </div>
