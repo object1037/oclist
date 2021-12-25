@@ -1,5 +1,7 @@
 interface classData {
-  title: string
-  url: string
-  time: number
+  id: number
+  class_time: number
+  class_title: string
+  class_url: string
+  account_id: string
 }

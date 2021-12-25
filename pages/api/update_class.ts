@@ -7,20 +7,36 @@ const conn = new PSDB('main')
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession({ req })
   const {
+    body: {
+      id,
+      class_time,
+      class_title,
+      class_url,
+    },
     method
   } = req
   if (!session) {
     return res.status(200)
   }
   switch (method) {
-    case 'GET':
+    case 'POST':
       try {
-        const [getRows, _] = await conn.query(`select * from class where account_id='${session?.user?.email}'`, '')
-        const classes = new Array(36)
-        getRows.forEach((element: classData) => {
-          classes[element.class_time] = element
-        });
-        res.status(200).json(classes)
+        if (id) {
+          const [rows, fields] = await conn.query(`
+          update class 
+          set class_time = ${class_time},
+              class_title = '${class_title}',
+              class_url = '${class_url}'
+          where id = ${id};
+          `, '')
+        } else {
+          const [rows, fields] = await conn.query(`
+          insert into class (class_time, class_title, class_url)
+          values (${class_time}, '${class_title}', '${class_url}');
+          `, '')
+        }
+        
+        res.status(200)
       } catch (e) {
         res.status(500).json({ message: 'An error occurred while connecting to the database' })
       }

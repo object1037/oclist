@@ -1,15 +1,20 @@
+import { useState } from "react";
+
 const ClassCard = ({
   classData
 }: {
   classData: classData
 }) => {
+  const [class_title, setClass_title] = useState(classData ? classData.class_title : '')
+  const [class_url, setClass_url] = useState(classData ? classData.class_url : '')
+
   function sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
   let openedWindow: Window | null
 
   function openWindow() {
-    openedWindow = window.open(classData.url)
+    openedWindow = window.open(classData.class_url)
     sleep(10000).then(() => closeOpenedWindow())
   }
 
@@ -17,13 +22,20 @@ const ClassCard = ({
     openedWindow?.close();
   }
 
+  if (!classData) {
+    return (
+      <>
+      <div className="p-4 border">
+      </div>
+      </>
+    )
+  }
   return (
     <>
-    <div className="p-4 bg-gray-100" onClick={() => openWindow()}>
-      <p>{classData.title}</p>
-      <p>{classData.time}</p>
-      <p>{classData.url}</p>
-    </div>
+    <button className="p-4 border" onClick={() => openWindow()}>
+      <p>{classData.class_title}</p>
+      <p>{classData.class_url}</p>
+    </button>
     </>
   )
 }

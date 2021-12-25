@@ -10,13 +10,9 @@ const fetcher = (url: string) => axios.get(url).then(res => res.data)
 
 const Home: NextPage = () => {
   const {data: session, status} = useSession()
-  const { data, error } = useSWR('/api/get-classes', fetcher)
+  const { data, error } = useSWR<classData[]>('/api/get-classes', fetcher)
   console.log(data)
-  async function clickHandler() {
-    await axios.get('/api/account', {
-    })
-  }
-  if (session) {
+  if (session && data) {
     return (
       <>
       <Head>
@@ -25,7 +21,13 @@ const Home: NextPage = () => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <main>
-        <p>logged in</p>
+        <div>
+          {data.map((classData, index) => {
+            return (
+              <ClassCard classData={classData} key={classData?.class_url ? classData.class_url : index} />
+            )
+          })}
+        </div>
       </main>
       </>
     )
@@ -40,7 +42,6 @@ const Home: NextPage = () => {
     <main>
       <button onClick={() => signIn()}>Sign in</button>
       <button onClick={() => signOut()}>Sign out</button>
-      <button onClick={() => clickHandler()}>aaa</button>
       <div>
       </div>
     </main>
