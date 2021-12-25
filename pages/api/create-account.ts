@@ -13,7 +13,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (method) {
     case 'POST':
       const [rows, fields] = await conn.query(`
-      insert ignore into accounts (account_id, account_email)
+      insert ignore into account (account_id, account_email)
       values ('${account.id}', '${account.email}')
       `, '')
       res.status(201).json({})

@@ -1,6 +1,8 @@
 import NextAuth from "next-auth"
 import GithubProvider from "next-auth/providers/github"
-import axios from 'axios'
+import { PSDB } from 'planetscale-node'
+
+const conn = new PSDB('main')
 
 export default NextAuth({
   // Configure one or more authentication providers
@@ -14,9 +16,11 @@ export default NextAuth({
   secret: process.env.NEXTAUTH_SECRET,
   events: {
     async signIn(message) {
-      await axios.post('/api/create-account', {
-        account: message.user
-      })
+      const account = message.user
+      const [rows, fields] = await conn.query(`
+      insert ignore into account (account_id, account_email)
+      values ('${account.id}', '${account.email}')
+      `, '')
     },
   }
 })
