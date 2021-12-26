@@ -65,7 +65,7 @@ const ClassCard = ({
     },
   };
 
-  if (!classData) {
+  if (!classData || (!classData.class_title && !classData.class_url)) {
     return (
       <>
       <button className="p-4 border" onClick={() => openModal()}>

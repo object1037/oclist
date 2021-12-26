@@ -1,18 +1,27 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import ClassCard from '../components/classCard'
 import { useSession } from 'next-auth/react'
 import axios from 'axios'
 import { signIn, signOut } from "next-auth/react"
 import useSWR from 'swr'
+import TimeTable from '../components/timeTable'
 
 const fetcher = (url: string) => axios.get(url).then(res => res.data)
 
 const Home: NextPage = () => {
   const {data: session, status} = useSession()
-  const { data, error } = useSWR<classData[]>('/api/get-classes', fetcher)
+  const loggedIn = session ? true : false
+  const { data, error } = useSWR<classData[]>(loggedIn ? '/api/get-classes' : null, fetcher)
   console.log(data)
-  if (session && data) {
+  if (status === "loading") {
+    return (
+      <div>
+        Loading...
+      </div>
+    )
+  }
+
+  if (status === 'unauthenticated') {
     return (
       <>
       <Head>
@@ -21,13 +30,7 @@ const Home: NextPage = () => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <main>
-        <div>
-          {data.map((classData, index) => {
-            return (
-              <ClassCard classData={classData} class_time={index} key={classData?.class_url ? classData.class_url : index} />
-            )
-          })}
-        </div>
+        <button onClick={() => signIn()}>Sign in</button>
       </main>
       </>
     )
@@ -40,9 +43,9 @@ const Home: NextPage = () => {
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <main>
-      <button onClick={() => signIn()}>Sign in</button>
       <button onClick={() => signOut()}>Sign out</button>
       <div>
+        <TimeTable data={data} />
       </div>
     </main>
     </>

@@ -16,7 +16,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       insert ignore into account (account_id, account_email)
       values ('${account.id}', '${account.email}')
       `, '')
-      res.status(201)
+      res.status(201).json({ message: 'successfully created an account' })
       break
     default:
       res.status(405).end(`Method ${method} Not Allowed`)
