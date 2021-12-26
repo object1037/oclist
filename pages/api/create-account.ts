@@ -14,7 +14,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     case 'POST':
       const [rows, fields] = await conn.query(`
       insert ignore into account (account_id, account_email)
-      values ('${account.id}', '${account.email}')
+      values ('${account.id}', '${account.email}');
       `, '')
       res.status(201).json({ message: 'successfully created an account' })
       break

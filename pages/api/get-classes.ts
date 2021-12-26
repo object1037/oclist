@@ -15,7 +15,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (method) {
     case 'GET':
       try {
-        const [getRows, _] = await conn.query(`select * from class where account_id='${session?.user?.email}'`, '')
+        const [getRows, _] = await conn.query(`select * from class where account_id='${session?.user?.email}';`, '')
         const classes = new Array(36)
         getRows.forEach((element: classData) => {
           classes[element.class_time] = element

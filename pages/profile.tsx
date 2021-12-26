@@ -5,6 +5,8 @@ import useSWR from 'swr'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import Setting from '../components/setting'
+import { signOut } from "next-auth/react"
+import { FiLogOut } from 'react-icons/fi'
 
 const fetcher = (url: string) => axios.get(url).then(res => res.data)
 
@@ -35,9 +37,15 @@ const Profile = () => {
     </Head>
     <main>
       <Header image={session!.user!.image!} />
-      <div className='pb-20 pt-10 px-6 sm:px-12 max-w-5xl mx-auto'>
-        <h2 className='text-2xl font-semibold'>Settings</h2>
+      <div className='py-20 px-6 sm:px-12 max-w-5xl mx-auto'>
+        <h2 className='text-3xl font-semibold mb-8'>Settings</h2>
         <Setting data={data} />
+        <div className='flex flex-col mt-20'>
+          <h2 className='text-3xl font-semibold mb-8'>Log out</h2>
+          <button onClick={() => signOut()} className='self-center border border-ppink-200 hover:bg-ppink-200 text-xl p-4 rounded-full transition' aria-label='Sign out button'>
+            <FiLogOut />
+          </button>
+        </div>
       </div>
     </main>
     </>
