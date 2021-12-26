@@ -22,5 +22,8 @@ export default NextAuth({
       values ('${account.id}', '${account.email}')
       `, '')
     },
-  }
+  },
+  pages: {
+    signIn: '/',
+  },
 })

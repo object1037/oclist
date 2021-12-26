@@ -35,8 +35,10 @@ const Home: NextPage = () => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <main className='py-16 px-6 sm:px-12 flex flex-col justify-center'>
-        <h1 className='text-4xl font-bold text-center mb-24'>oclist</h1>
-        <button onClick={() => signIn()} className='border border-ppink-200 hover:bg-ppink-200 text-xl mx-auto p-4 rounded-full transition'>
+        <h1 className='text-5xl font-bold text-center mb-16'>oclist</h1>
+        <p className='text-center text-lg text-gray-300 mb-6'>Manage all online class URLs in one place.</p>
+        <p className='text-center text-gray-300 mb-10'>Please sign in with your GitHub account.</p>
+        <button onClick={() => signIn('github')} className='border border-ppink-200 hover:bg-ppink-200 text-xl mx-auto p-4 rounded-full transition'>
           <FiLogIn />
         </button>
       </main>
