@@ -6,6 +6,7 @@ import { signIn } from "next-auth/react"
 import useSWR from 'swr'
 import TimeTable from '../components/timeTable'
 import Header from '../components/header'
+import { FiLogIn } from 'react-icons/fi'
 
 const fetcher = (url: string) => axios.get(url).then(res => res.data)
 
@@ -16,7 +17,7 @@ const Home: NextPage = () => {
   console.log(data)
   if (status === "loading") {
     return (
-      <div>
+      <div className='flex justify-center py-24'>
         Loading...
       </div>
     )
@@ -30,8 +31,11 @@ const Home: NextPage = () => {
         <meta name="description" content="online class list" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <main>
-        <button onClick={() => signIn()}>Sign in</button>
+      <main className='py-16 px-6 sm:px-12 flex flex-col justify-center'>
+        <h1 className='text-4xl font-bold text-center mb-24'>oclist</h1>
+        <button onClick={() => signIn()} className='hover:bg-gray-100 text-xl mx-auto p-4 rounded-full'>
+          <FiLogIn />
+        </button>
       </main>
       </>
     )

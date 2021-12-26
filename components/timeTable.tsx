@@ -16,7 +16,7 @@ const TimeTable = ({
 }) => {
   if (!data) {
     return (
-      <div>Loading...</div>
+      <div className="flex justify-center">Loading...</div>
     )
   }
   return (
