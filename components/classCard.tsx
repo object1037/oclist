@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FiEdit, FiPlus } from 'react-icons/fi'
 import Modal from 'react-modal'
 import axios from 'axios'
+import clsx from 'clsx'
 
 Modal.setAppElement('#__next');
 
@@ -31,7 +32,7 @@ const ClassCard = ({
   let openedWindow: Window | null
 
   function openWindow() {
-    openedWindow = window.open(classData.class_url)
+    openedWindow = window.open(class_url)
     sleep(10000).then(() => closeOpenedWindow())
   }
 
@@ -54,62 +55,82 @@ const ClassCard = ({
     }
   }
 
-  const customStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-    },
-  };
+  const modalStyle = [
+    'bg-white',
+    'dark:bg-gray-900',
+    'border',
+    'border-transparent',
+    'dark:border-gray-700',
+    'rounded-md',
+    'outline-none',
+    'w-full',
+    'mx-auto',
+    'md:max-w-2xl',
+    'p-4',
+    'sm:p-8',
+    'max-h-full',
+    'overflow-auto'
+  ]
+  const overlayStyle = [
+    'bg-black',
+    'bg-opacity-20',
+    'backdrop-blur-sm',
+    'dark:bg-opacity-50',
+    'fixed',
+    'inset-0',
+    'z-20',
+    'px-5',
+    'sm:px-12',
+    'pt-12',
+    'sm:pt-24',
+    'pb-5',
+    'sm:pb-12'
+  ]
+
+  const inputStyle = [
+    'rounded',
+    'p-3',
+    'max-w-xl',
+    'w-full'
+  ]
+
+  const modal = 
+  <Modal
+    isOpen={modalIsOpen}
+    onRequestClose={closeModal}
+    contentLabel="Modal"
+    className={clsx(modalStyle)}
+    overlayClassName={clsx(overlayStyle)}
+  >
+    <form onSubmit={submitHandler} className="flex flex-col space-y-8 items-center">
+      <input type='text' name="class_title" value={class_title} onChange={(e) => setClass_title(e.target.value)} className={clsx(inputStyle)} />
+      <input type='text' name="class_url" value={class_url} onChange={(e) => setClass_url(e.target.value)} className={clsx(inputStyle)} />
+      <button type='submit' className="bg-gray-100 hover:bg-gray-200 w-24 h-10 rounded">更新</button>
+    </form>
+  </Modal>
 
   if (!classData || (!classData.class_title && !classData.class_url)) {
     return (
       <>
-      <button className="group p-4 bg-gray-100 rounded" onClick={() => openModal()}>
+      <button className="group px-12 bg-gray-100 rounded h-32" onClick={() => openModal()}>
         <div className="invisible group-hover:visible flex justify-center">
           <FiPlus />
         </div>
       </button>
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="Modal"
-      >
-        <form onSubmit={submitHandler}>
-          <input type='text' name="class_title" value={class_title} onChange={(e) => setClass_title(e.target.value)} />
-          <input type='text' name="class_url" value={class_url} onChange={(e) => setClass_url(e.target.value)} />
-          <button type='submit'>更新</button>
-        </form>
-      </Modal>
+      {modal}
       </>
     )
   }
   return (
     <>
-    <div className="p-4 bg-gray-100 rounded flex flex-row">
+    <div className="group bg-gray-100 rounded flex flex-row h-32">
       <button className="basis-5/6" onClick={() => openWindow()}>
-        <p>{classData.class_title}</p>
-        <p>{classData.class_time}</p>
+        <p className="p-4 text-left text-lg font-semibold rounded-l block h-full break-all">{class_title}</p>
       </button>
-      <button className="basis-1/6 flex justify-center items-center" onClick={() => openModal()}>
+      <button className="hover:bg-gray-200 px-2 basis-1/6 rounded-r" onClick={() => openModal()}>
         <FiEdit />
       </button>
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="Modal"
-      >
-        <form onSubmit={submitHandler}>
-          <input type='text' name="class_title" value={class_title} onChange={(e) => setClass_title(e.target.value)} />
-          <input type='text' name="class_url" value={class_url} onChange={(e) => setClass_url(e.target.value)} />
-          <button type='submit'>更新</button>
-        </form>
-      </Modal>
+      {modal}
     </div>
     </>
   )
