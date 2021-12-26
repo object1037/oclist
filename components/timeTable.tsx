@@ -28,7 +28,7 @@ const TimeTable = ({
   const [day, setDay] = useState(0)
   useEffect(() => {
     const now = new Date()
-    const day = now.getDay()
+    const day = now.getDay() - 1
     setDay(day)
     console.log(day)
   }, [])
