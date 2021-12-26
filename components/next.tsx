@@ -59,7 +59,12 @@ const Next = ({
   }, [account, time, data])
 
   if (!data || !account) {
-    return <></>
+    return (
+      <div className="flex flex-col max-w-xl mx-auto mb-12">
+        <h2 className="font-bold text-3xl mb-6">Next</h2>
+        <div className="animate-pulse bg-gray-800 rounded-lg h-32"></div>
+      </div>
+    )
   }
 
   return (
