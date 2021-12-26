@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FiEdit } from 'react-icons/fi'
+import { FiEdit, FiPlus } from 'react-icons/fi'
 import Modal from 'react-modal'
 import axios from 'axios'
 
@@ -68,7 +68,10 @@ const ClassCard = ({
   if (!classData || (!classData.class_title && !classData.class_url)) {
     return (
       <>
-      <button className="p-4 border" onClick={() => openModal()}>
+      <button className="group p-4 bg-gray-100 rounded" onClick={() => openModal()}>
+        <div className="invisible group-hover:visible flex justify-center">
+          <FiPlus />
+        </div>
       </button>
       <Modal
         isOpen={modalIsOpen}
@@ -87,25 +90,27 @@ const ClassCard = ({
   }
   return (
     <>
-    <button className="" onClick={() => openModal()}>
-      <FiEdit />
-    </button>
-    <Modal
-      isOpen={modalIsOpen}
-      onRequestClose={closeModal}
-      style={customStyles}
-      contentLabel="Modal"
-    >
-      <form onSubmit={submitHandler}>
-        <input type='text' name="class_title" value={class_title} onChange={(e) => setClass_title(e.target.value)} />
-        <input type='text' name="class_url" value={class_url} onChange={(e) => setClass_url(e.target.value)} />
-        <button type='submit'>更新</button>
-      </form>
-    </Modal>
-    <button className="p-4 border" onClick={() => openWindow()}>
-      <p>{classData.class_title}</p>
-      <p>{classData.class_url}</p>
-    </button>
+    <div className="p-4 bg-gray-100 rounded flex flex-row">
+      <button className="basis-5/6" onClick={() => openWindow()}>
+        <p>{classData.class_title}</p>
+        <p>{classData.class_time}</p>
+      </button>
+      <button className="basis-1/6 flex justify-center items-center" onClick={() => openModal()}>
+        <FiEdit />
+      </button>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Modal"
+      >
+        <form onSubmit={submitHandler}>
+          <input type='text' name="class_title" value={class_title} onChange={(e) => setClass_title(e.target.value)} />
+          <input type='text' name="class_url" value={class_url} onChange={(e) => setClass_url(e.target.value)} />
+          <button type='submit'>更新</button>
+        </form>
+      </Modal>
+    </div>
     </>
   )
 }

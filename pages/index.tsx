@@ -44,7 +44,7 @@ const Home: NextPage = () => {
     </Head>
     <main>
       <button onClick={() => signOut()}>Sign out</button>
-      <div>
+      <div className='p-4'>
         <TimeTable data={data} />
       </div>
     </main>
