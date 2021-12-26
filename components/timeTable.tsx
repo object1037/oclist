@@ -1,4 +1,6 @@
 import ClassCard from "./classCard"
+import { useEffect, useState } from "react"
+import clsx from "clsx"
 
 const weekDays = [
   'Mon',
@@ -9,11 +11,27 @@ const weekDays = [
   'Sat'
 ]
 
+const labelStyle = [
+  'font-bold',
+  'text-3xl',
+  'place-self-center',
+  'p-3',
+  'rounded-full'
+]
+
 const TimeTable = ({
   data
 }: {
   data: classData[] | undefined
 }) => {
+  const [day, setDay] = useState(0)
+  useEffect(() => {
+    const now = new Date()
+    const day = now.getDay() - 1
+    setDay(day)
+    console.log(day)
+  }, [])
+
   if (!data) {
     return (
       <div className="flex justify-center">Loading...</div>
@@ -29,7 +47,7 @@ const TimeTable = ({
           )
         }
         return (
-          <div key={`classHour${index}`} className="font-bold text-3xl place-self-center">{index}</div>
+          <div key={`classHour${index}`} className={clsx(labelStyle)}>{index}</div>
         )
       })}
       </div>
@@ -37,7 +55,7 @@ const TimeTable = ({
         if (index % 6 === 0) {
           return (
             <div className="contents" key={`weekDayandClass${index}`}>
-              <div className="font-bold text-3xl place-self-center">{weekDays[index / 6]}</div>
+              <div className={clsx(labelStyle, (index / 6) === day && 'bg-pink-200')}>{weekDays[index / 6]}</div>
               <ClassCard classData={classData} class_time={index} />
             </div>
           )
