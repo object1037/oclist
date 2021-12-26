@@ -112,7 +112,7 @@ const ClassCard = ({
   if (!classData || (!classData.class_title && !classData.class_url)) {
     return (
       <>
-      <button className="group px-12 bg-gray-100 rounded h-32" onClick={() => openModal()}>
+      <button className="group bg-gray-100 rounded h-32" onClick={() => openModal()}>
         <div className="invisible group-hover:visible flex justify-center">
           <FiPlus />
         </div>
@@ -125,7 +125,7 @@ const ClassCard = ({
     <>
     <div className="group bg-gray-100 rounded flex flex-row h-32">
       <button className="basis-5/6" onClick={() => openWindow()}>
-        <p className="p-4 text-left text-lg font-semibold rounded-l block h-full break-all">{class_title}</p>
+        <p className="p-4 text-left text-lg font-semibold rounded-l block h-full break-all overflow-hidden">{class_title}</p>
       </button>
       <button className="hover:bg-gray-200 px-2 basis-1/6 rounded-r" onClick={() => openModal()}>
         <FiEdit />
