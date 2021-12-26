@@ -15,7 +15,8 @@ const labelStyle = [
   'font-bold',
   'text-3xl',
   'place-self-center',
-  'p-3',
+  'py-3',
+  'px-5',
   'rounded-full'
 ]
 
@@ -27,7 +28,7 @@ const TimeTable = ({
   const [day, setDay] = useState(0)
   useEffect(() => {
     const now = new Date()
-    const day = now.getDay() - 1
+    const day = now.getDay()
     setDay(day)
     console.log(day)
   }, [])
@@ -55,7 +56,7 @@ const TimeTable = ({
         if (index % 6 === 0) {
           return (
             <div className="contents" key={`weekDayandClass${index}`}>
-              <div className={clsx(labelStyle, (index / 6) === day && 'bg-pink-200')}>{weekDays[index / 6]}</div>
+              <div className={clsx(labelStyle, (index / 6) === day && 'border border-ppink-200')}>{weekDays[index / 6]}</div>
               <ClassCard classData={classData} class_time={index} />
             </div>
           )

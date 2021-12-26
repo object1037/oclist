@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FiEdit, FiPlus } from 'react-icons/fi'
+import { FiEdit, FiPlus, FiCheck } from 'react-icons/fi'
 import Modal from 'react-modal'
 import axios from 'axios'
 import clsx from 'clsx'
@@ -56,12 +56,10 @@ const ClassCard = ({
   }
 
   const modalStyle = [
-    'bg-white',
-    'dark:bg-gray-900',
+    'bg-gray-900',
     'border',
-    'border-transparent',
-    'dark:border-gray-700',
-    'rounded-md',
+    'border-gray-700',
+    'rounded-xl',
     'outline-none',
     'w-full',
     'mx-auto',
@@ -73,9 +71,7 @@ const ClassCard = ({
   ]
   const overlayStyle = [
     'bg-black',
-    'bg-opacity-20',
-    'backdrop-blur-sm',
-    'dark:bg-opacity-50',
+    'bg-opacity-50',
     'fixed',
     'inset-0',
     'z-20',
@@ -88,10 +84,14 @@ const ClassCard = ({
   ]
 
   const inputStyle = [
-    'rounded',
+    'rounded-full',
     'p-3',
+    'px-6',
     'max-w-xl',
-    'w-full'
+    'w-full',
+    'bg-gray-800',
+    'border-0',
+    'focus:ring-0',
   ]
 
   const modal = 
@@ -105,15 +105,17 @@ const ClassCard = ({
     <form onSubmit={submitHandler} className="flex flex-col space-y-8 items-center">
       <input type='text' name="class_title" value={class_title} onChange={(e) => setClass_title(e.target.value)} className={clsx(inputStyle)} />
       <input type='text' name="class_url" value={class_url} onChange={(e) => setClass_url(e.target.value)} className={clsx(inputStyle)} />
-      <button type='submit' className="bg-gray-100 hover:bg-gray-200 w-24 h-10 rounded">更新</button>
+      <button type='submit' className="border border-ppink-200 hover:bg-ppink-200 p-4 text-lg rounded-full transition">
+        <FiCheck />
+      </button>
     </form>
   </Modal>
 
   if (!classData || (!classData.class_title && !classData.class_url)) {
     return (
       <>
-      <button className="group bg-gray-100 rounded h-32" onClick={() => openModal()}>
-        <div className="invisible group-hover:visible flex justify-center">
+      <button className="group bg-gray-800 rounded-lg h-32 outline-none" onClick={() => openModal()}>
+        <div className="invisible group-hover:visible flex justify-center text-2xl transition">
           <FiPlus />
         </div>
       </button>
@@ -123,11 +125,11 @@ const ClassCard = ({
   }
   return (
     <>
-    <div className="group bg-gray-100 rounded flex flex-row h-32">
-      <button className="basis-5/6" onClick={() => openWindow()}>
-        <p className="p-4 text-left text-lg font-semibold rounded-l block h-full break-all overflow-hidden">{class_title}</p>
+    <div className="group bg-gray-800 rounded-lg flex flex-row h-32">
+      <button className="basis-5/6 hover:bg-gray-700 rounded-l-lg transition" onClick={() => openWindow()}>
+        <p className="p-4 text-left text-lg font-semibold block h-full break-all overflow-hidden">{class_title}</p>
       </button>
-      <button className="hover:bg-gray-200 px-2 basis-1/6 rounded-r" onClick={() => openModal()}>
+      <button className="hover:bg-gray-700 px-2 basis-1/6 rounded-r-lg outline-none transition" onClick={() => openModal()}>
         <FiEdit />
       </button>
       {modal}

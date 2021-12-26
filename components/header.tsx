@@ -3,9 +3,9 @@ import { FiLogOut } from 'react-icons/fi'
 
 const Header = () => {
   return (
-    <header className="flex justify-between items-center border-b py-3 px-6 sm:px-12">
+    <header className="flex justify-between items-center border-b border-gray-600 py-3 px-6 sm:px-12">
       <h1 className="text-3xl font-bold">oclist</h1>
-      <button onClick={() => signOut()} className="hover:bg-gray-100 p-4 rounded-full text-lg">
+      <button onClick={() => signOut()} className="hover:bg-gray-800 p-4 rounded-full text-lg">
         <FiLogOut />
       </button>
     </header>

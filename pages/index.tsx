@@ -33,7 +33,7 @@ const Home: NextPage = () => {
       </Head>
       <main className='py-16 px-6 sm:px-12 flex flex-col justify-center'>
         <h1 className='text-4xl font-bold text-center mb-24'>oclist</h1>
-        <button onClick={() => signIn()} className='hover:bg-gray-100 text-xl mx-auto p-4 rounded-full'>
+        <button onClick={() => signIn()} className='border border-ppink-200 hover:bg-ppink-200 text-xl mx-auto p-4 rounded-full transition'>
           <FiLogIn />
         </button>
       </main>
@@ -49,7 +49,7 @@ const Home: NextPage = () => {
     </Head>
     <main>
       <Header />
-      <div className='py-16 px-6 sm:px-12'>
+      <div className='py-12 px-6 sm:px-12'>
         <TimeTable data={data} />
       </div>
     </main>
