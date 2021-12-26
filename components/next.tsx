@@ -56,14 +56,19 @@ const Next = ({
     }
 
     return 0
-  }, [account])
+  }, [account, time])
 
   if (!data || !account) {
     return <></>
   }
 
   return (
-    <ClassCard classData={data[nextTime]} class_time={nextTime}/>
+    <>
+    <div className="flex flex-col max-w-xl mx-auto mb-12">
+      <h2 className="font-bold text-3xl mb-6">Next</h2>
+      <ClassCard classData={data[nextTime]} class_time={nextTime}/>
+    </div>
+    </>
   )
 }
 

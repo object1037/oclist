@@ -129,7 +129,6 @@ const ClassCard = ({
         <div className="invisible group-hover:visible flex justify-center text-2xl transition">
           <FiPlus />
         </div>
-        <p>{class_time}</p>
       </button>
       {modal}
       </>
