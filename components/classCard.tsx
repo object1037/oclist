@@ -122,7 +122,7 @@ const ClassCard = ({
     </form>
   </Modal>
 
-  if (!classData || (!class_title && !class_url)) {
+  if (!class_title && !class_url) {
     return (
       <>
       <button className="group bg-gray-800 rounded-lg h-32 outline-none" onClick={() => openModal()} aria-label={`add class data at index of ${class_time}`}>
