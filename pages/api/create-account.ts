@@ -1,5 +1,6 @@
 import { PSDB } from 'planetscale-node'
 import type { NextApiRequest, NextApiResponse } from 'next'
+import SQL from 'sql-template-strings'
 
 const conn = new PSDB('main')
 
@@ -12,10 +13,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   } = req
   switch (method) {
     case 'POST':
-      const [rows, fields] = await conn.query(`
+      const [rows, fields] = await conn.query(SQL`
       insert ignore into account (account_id, account_email)
-      values ('${account.id}', '${account.email}');
-      `, '')
+      values (${account.id}, ${account.email});
+      `)
       res.status(201).json({ message: 'successfully created an account' })
       break
     default:

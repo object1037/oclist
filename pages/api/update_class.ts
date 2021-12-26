@@ -1,6 +1,7 @@
 import { PSDB } from 'planetscale-node'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from "next-auth/react"
+import SQL from 'sql-template-strings'
 
 const conn = new PSDB('main')
 
@@ -22,18 +23,18 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     case 'POST':
       try {
         if (id) {
-          const [rows, fields] = await conn.query(`
+          const [rows, fields] = await conn.query(SQL`
           update class 
           set class_time = ${class_time},
-              class_title = '${class_title}',
-              class_url = '${class_url}'
+              class_title = ${class_title},
+              class_url = ${class_url}
           where id = ${id};
-          `, '')
+          `)
         } else {
-          const [rows, fields] = await conn.query(`
+          const [rows, fields] = await conn.query(SQL`
           insert into class (class_time, class_title, class_url, account_id)
-          values (${class_time}, '${class_title}', '${class_url}', '${session.user?.email}');
-          `, '')
+          values (${class_time}, ${class_title}, ${class_url}, ${session.user?.email});
+          `)
         }
         
         res.status(200).json({ message: 'Updated class data' })

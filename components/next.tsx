@@ -23,7 +23,7 @@ const Next = ({
   const { data: account, error } = useSWR('/api/get-settings', fetcher)
 
   let nextTime = useMemo(() => {
-    if (!account) {
+    if (!account || !data) {
       return -1
     }
 
@@ -49,14 +49,14 @@ const Next = ({
           end: settings[j].substring(6),
         })
         const startTime = 24 * 60 * i + +settings[j].substring(0, 2) * 60 + +settings[j].substring(3, 5)
-        if (time < startTime) {
+        if (time < startTime && (data[i * 6 + j].class_url || data[i * 6 + j].class_title)) {
           return (i * 6 + j)
         }
       }
     }
 
     return 0
-  }, [account, time])
+  }, [account, time, data])
 
   if (!data || !account) {
     return <></>
