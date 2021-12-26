@@ -9,7 +9,7 @@ module.exports = {
   theme: {
     extend: {
       gridTemplateRows: {
-        'ttable': '4rem repeat(6, minmax(0, 1fr));',
+        'ttable': '8rem repeat(6, minmax(0, 1fr));',
       },
       gridTemplateColumns: {
         'ttable': '4rem repeat(6, minmax(0, 1fr));',

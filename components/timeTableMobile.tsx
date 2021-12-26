@@ -1,5 +1,5 @@
 import ClassCard from "./classCard"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import clsx from "clsx"
 
 const weekDays = [
@@ -14,30 +14,35 @@ const weekDays = [
 const labelStyle = [
   'font-bold',
   'text-3xl',
-  'place-self-center',
-  'py-3',
-  'px-5',
-  'rounded-full'
-]
-const dayLabelStyle = [
   'w-24',
   'h-24',
   'flex',
   'justify-center',
   'items-center',
+  'rounded-full',
 ]
 
-const TimeTable = ({
+const TimeTableMobile = ({
   data
 }: {
   data: classData[] | undefined
 }) => {
   const [day, setDay] = useState(0)
+  const ref0 = useRef<HTMLDivElement>(null)
+  const ref1 = useRef<HTMLDivElement>(null)
+  const ref2 = useRef<HTMLDivElement>(null)
+  const ref3 = useRef<HTMLDivElement>(null)
+  const ref4 = useRef<HTMLDivElement>(null)
+  const ref5 = useRef<HTMLDivElement>(null)
+
+  const refs = [ref0, ref1, ref2, ref3, ref4, ref5]
+
   useEffect(() => {
     const now = new Date()
-    const day = now.getDay() - 1
+    const day = now.getDay() + 3
     setDay(day)
-  }, [])
+    refs[day]?.current?.scrollIntoView()
+  }, [refs])
 
   if (!data) {
     return (
@@ -45,24 +50,17 @@ const TimeTable = ({
     )
   }
   return (
-    <div className="grid grid-rows-ttable grid-cols-ttable grid-flow-col auto-cols-fr gap-4">
-      <div className="contents">
-      {Array.from({length: 7}, (x, i) => i).map((_, index) => {
-        if (index === 0) {
-          return (
-            <div key={`classHour${index}`} />
-          )
-        }
-        return (
-          <div key={`classHour${index}`} className={clsx(labelStyle)}>{index}</div>
-        )
-      })}
-      </div>
+    <>
+    <div className="flex flex-col space-y-6">
       {data.map((classData, index) => {
         if (index % 6 === 0) {
           return (
             <div className="contents" key={`weekDayandClass${index}`}>
-              <div className={clsx(labelStyle, dayLabelStyle, (index / 6) === day && 'border border-ppink-200')}>{weekDays[index / 6]}</div>
+              <div ref={refs[index / 6]} className="pt-6 my-8 self-start">
+                <div className={clsx(labelStyle, (index / 6) === day && 'border border-ppink-200')}>
+                  {weekDays[index / 6]}
+                </div>
+              </div>
               <ClassCard classData={classData} class_time={index} />
             </div>
           )
@@ -72,7 +70,8 @@ const TimeTable = ({
         )
       })}
     </div>
+    </>
   )
 }
 
-export default TimeTable
+export default TimeTableMobile

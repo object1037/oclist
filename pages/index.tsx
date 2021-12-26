@@ -5,6 +5,7 @@ import axios from 'axios'
 import { signIn } from "next-auth/react"
 import useSWR from 'swr'
 import TimeTable from '../components/timeTable'
+import TimeTableMobile from '../components/timeTableMobile'
 import Header from '../components/header'
 import { FiLogIn } from 'react-icons/fi'
 
@@ -14,7 +15,6 @@ const Home: NextPage = () => {
   const {data: session, status} = useSession()
   const loggedIn = session ? true : false
   const { data, error } = useSWR<classData[]>(loggedIn ? '/api/get-classes' : null, fetcher)
-  console.log(data)
   if (status === "loading") {
     return (
       <div className='flex justify-center py-24'>
@@ -49,8 +49,8 @@ const Home: NextPage = () => {
     </Head>
     <main>
       <Header />
-      <div className='py-12 px-6 sm:px-12'>
-        <TimeTable data={data} />
+      <div className='py-0 sm:py-10 px-6 sm:px-12'>
+        <TimeTableMobile data={data} />
       </div>
     </main>
     </>

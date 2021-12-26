@@ -137,11 +137,11 @@ const ClassCard = ({
   }
   return (
     <>
-    <div className="group bg-gray-800 rounded-lg flex flex-row h-32">
+    <div className="bg-gray-800 rounded-lg flex flex-row h-32">
       <button className="basis-5/6 hover:bg-gray-700 rounded-l-lg transition" onClick={() => openWindow()}>
         <p className="p-4 text-left text-lg font-semibold block h-full break-all overflow-hidden">{class_title}</p>
       </button>
-      <button className="hover:bg-gray-700 px-2 basis-1/6 rounded-r-lg outline-none transition" onClick={() => openModal()}>
+      <button onClick={() => openModal()} className="flex justify-center items-center hover:bg-gray-700 basis-1/6 rounded-r-lg outline-none transition text-lg">
         <FiEdit />
       </button>
       {modal}
