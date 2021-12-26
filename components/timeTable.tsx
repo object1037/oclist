@@ -32,7 +32,7 @@ const TimeTable = ({
 }: {
   data: classData[] | undefined
 }) => {
-  const [day, setDay] = useState(0)
+  const [day, setDay] = useState(-1)
   useEffect(() => {
     const now = new Date()
     const day = now.getDay() - 1

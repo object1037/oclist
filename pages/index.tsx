@@ -53,7 +53,7 @@ const Home: NextPage = () => {
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <main>
-      <Header />
+      <Header image={session!.user!.image!} />
       <div className='pb-20 pt-0 lg:pt-10 px-6 sm:px-12'>
         {isLg ? <TimeTable data={data} /> : <TimeTableMobile data={data} />}
       </div>
