@@ -6,6 +6,7 @@ import { signIn } from "next-auth/react"
 import useSWR from 'swr'
 import TimeTable from '../components/timeTable'
 import TimeTableMobile from '../components/timeTableMobile'
+import Next from '../components/next'
 import Header from '../components/header'
 import { FiLogIn } from 'react-icons/fi'
 import { useMediaQuery } from 'react-responsive'
@@ -54,7 +55,8 @@ const Home: NextPage = () => {
     </Head>
     <main>
       <Header image={session!.user!.image!} />
-      <div className='pb-20 pt-0 lg:pt-10 px-6 sm:px-12'>
+      <div className='pt-6 lg:pt-10 pb-20 px-6 sm:px-12'>
+        <Next data={data} />
         {isLg ? <TimeTable data={data} /> : <TimeTableMobile data={data} />}
       </div>
     </main>

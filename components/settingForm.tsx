@@ -37,15 +37,22 @@ const SettingForm = ({
 
   function submitHandler(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    const range_0 = `${range0}-${range02}`
+    const range_1 = `${range1}-${range12}`
+    const range_2 = `${range2}-${range22}`
+    const range_3 = `${range3}-${range32}`
+    const range_4 = `${range4}-${range42}`
+    const range_5 = `${range5}-${range52}`
+
     try {
       axios.post('/api/update_settings', {
         account_email: data[0].account_email,
-        range_0: range0,
-        range_1: range1,
-        range_2: range2,
-        range_3: range3,
-        range_4: range4,
-        range_5: range5
+        range_0: range_0,
+        range_1: range_1,
+        range_2: range_2,
+        range_3: range_3,
+        range_4: range_4,
+        range_5: range_5
       })
     } catch (e) {
       throw Error(String(e))

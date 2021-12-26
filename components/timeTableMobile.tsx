@@ -1,5 +1,5 @@
 import ClassCard from "./classCard"
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState } from "react"
 import clsx from "clsx"
 
 const weekDays = [
@@ -20,6 +20,9 @@ const labelStyle = [
   'justify-center',
   'items-center',
   'rounded-full',
+  'self-start',
+  'mt-10',
+  'mb-8'
 ]
 
 const TimeTableMobile = ({
@@ -28,21 +31,12 @@ const TimeTableMobile = ({
   data: classData[] | undefined
 }) => {
   const [day, setDay] = useState(-1)
-  const ref0 = useRef<HTMLDivElement>(null)
-  const ref1 = useRef<HTMLDivElement>(null)
-  const ref2 = useRef<HTMLDivElement>(null)
-  const ref3 = useRef<HTMLDivElement>(null)
-  const ref4 = useRef<HTMLDivElement>(null)
-  const ref5 = useRef<HTMLDivElement>(null)
-
-  const refs = [ref0, ref1, ref2, ref3, ref4, ref5]
 
   useEffect(() => {
     const now = new Date()
     const day = now.getDay() - 1
     setDay(day)
-    refs[day]?.current?.scrollIntoView()
-  }, [refs])
+  }, [])
 
   if (!data) {
     return (
@@ -56,10 +50,8 @@ const TimeTableMobile = ({
         if (index % 6 === 0) {
           return (
             <div className="contents" key={`weekDayandClass${index}`}>
-              <div ref={refs[index / 6]} className="pt-6 my-8 self-start">
-                <div className={clsx(labelStyle, (index / 6) === day && 'border border-ppink-200')}>
-                  {weekDays[index / 6]}
-                </div>
+              <div className={clsx(labelStyle, (index / 6) === day && 'border border-ppink-200')}>
+                {weekDays[index / 6]}
               </div>
               <ClassCard classData={classData} class_time={index} />
             </div>

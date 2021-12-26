@@ -26,6 +26,11 @@ const Profile = () => {
 
   if (status === 'unauthenticated') {
     router.push('/')
+    return (
+      <div className='flex justify-center py-24'>
+        Redirecting...
+      </div>
+    )
   }
 
   return (
