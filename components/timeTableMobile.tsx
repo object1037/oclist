@@ -39,14 +39,14 @@ const TimeTableMobile = ({
 
   useEffect(() => {
     const now = new Date()
-    const day = now.getDay() + 3
+    const day = now.getDay() - 1
     setDay(day)
     refs[day]?.current?.scrollIntoView()
   }, [refs])
 
   if (!data) {
     return (
-      <div className="flex justify-center">Loading...</div>
+      <div className="flex justify-center mt-12">Loading...</div>
     )
   }
   return (
