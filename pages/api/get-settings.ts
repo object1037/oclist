@@ -16,7 +16,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (method) {
     case 'GET':
       try {
-        const [getRows, _] = await conn.query(SQL`SELECT * FROM account WHERE account_email = ${session?.user?.email}`)
+        const query = SQL`SELECT * FROM account WHERE account_email = ${session?.user?.email}`
+        const [getRows, _] = await conn.query(query.sql, query.values)
         res.status(200).json(getRows)
       } catch (e) {
         res.status(500).json({ message: String(e) })

@@ -23,18 +23,20 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     case 'POST':
       try {
         if (id) {
-          const [rows, fields] = await conn.query(SQL`
+          const query = SQL`
           update class 
           set class_time = ${class_time},
               class_title = ${class_title},
               class_url = ${class_url}
           where id = ${id};
-          `)
+          `
+          const [rows, fields] = await conn.query(query.sql, query.values)
         } else {
-          const [rows, fields] = await conn.query(SQL`
+          const query = SQL`
           insert into class (class_time, class_title, class_url, account_id)
           values (${class_time}, ${class_title}, ${class_url}, ${session.user?.email});
-          `)
+          `
+          const [rows, fields] = await conn.query(query.sql, query.values)
         }
         
         res.status(200).json({ message: 'Updated class data' })

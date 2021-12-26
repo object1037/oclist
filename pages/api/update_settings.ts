@@ -25,7 +25,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (method) {
     case 'POST':
       try {
-        const [rows, fields] = await conn.query(SQL`
+        const query = SQL`
         update account
         set range_0 = ${range_0},
             range_1 = ${range_1},
@@ -34,7 +34,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             range_4 = ${range_4},
             range_5 = ${range_5}
         where account_email = ${account_email};
-        `)
+        `
+        const [rows, fields] = await conn.query(query.sql, query.values)
         
         res.status(200).json({ message: 'Updated settings' })
       } catch (e) {
