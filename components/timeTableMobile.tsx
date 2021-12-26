@@ -51,7 +51,7 @@ const TimeTableMobile = ({
   }
   return (
     <>
-    <div className="flex flex-col space-y-6">
+    <div className="flex flex-col space-y-6 max-w-xl mx-auto">
       {data.map((classData, index) => {
         if (index % 6 === 0) {
           return (

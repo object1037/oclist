@@ -8,6 +8,31 @@ import TimeTable from '../components/timeTable'
 import TimeTableMobile from '../components/timeTableMobile'
 import Header from '../components/header'
 import { FiLogIn } from 'react-icons/fi'
+import { useState, useEffect } from 'react';
+
+const useMediaQuery = () => {
+  const [mq, setMq] = useState({
+    isLg: window.matchMedia('(min-width: 1024px)').matches,
+  });
+
+  useEffect(() => {
+    const onResize = () => {
+      setMq({
+        isLg: window.matchMedia('(min-width: 1024px)').matches,
+      });
+    }
+
+    window.addEventListener('resize', onResize);
+    window.addEventListener('load', onResize);
+
+    return () => {
+      window.removeEventListener('resize', onResize);
+      window.removeEventListener('load', onResize);
+    }
+  });
+
+  return mq
+}
 
 const fetcher = (url: string) => axios.get(url).then(res => res.data)
 
@@ -15,6 +40,8 @@ const Home: NextPage = () => {
   const {data: session, status} = useSession()
   const loggedIn = session ? true : false
   const { data, error } = useSWR<classData[]>(loggedIn ? '/api/get-classes' : null, fetcher)
+  const mq = useMediaQuery()
+
   if (status === "loading") {
     return (
       <div className='flex justify-center py-24'>
@@ -49,8 +76,8 @@ const Home: NextPage = () => {
     </Head>
     <main>
       <Header />
-      <div className='py-0 sm:py-10 px-6 sm:px-12'>
-        <TimeTableMobile data={data} />
+      <div className='py-0 lg:py-10 px-6 sm:px-12'>
+        {mq.isLg ? <TimeTable data={data} /> : <TimeTableMobile data={data} />}
       </div>
     </main>
     </>
