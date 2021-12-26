@@ -27,7 +27,7 @@ const TimeTableMobile = ({
 }: {
   data: classData[] | undefined
 }) => {
-  const [day, setDay] = useState(0)
+  const [day, setDay] = useState(-1)
   const ref0 = useRef<HTMLDivElement>(null)
   const ref1 = useRef<HTMLDivElement>(null)
   const ref2 = useRef<HTMLDivElement>(null)

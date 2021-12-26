@@ -38,7 +38,7 @@ const Home: NextPage = () => {
         <h1 className='text-5xl font-bold text-center mb-16'>oclist</h1>
         <p className='text-center text-lg text-gray-300 mb-6'>Manage all online class URLs in one place.</p>
         <p className='text-center text-gray-300 mb-10'>Please sign in with your GitHub account.</p>
-        <button onClick={() => signIn('github')} className='border border-ppink-200 hover:bg-ppink-200 text-xl mx-auto p-4 rounded-full transition'>
+        <button onClick={() => signIn('github')} className='border border-ppink-200 hover:bg-ppink-200 text-xl mx-auto p-4 rounded-full transition' aria-label='Sign in button'>
           <FiLogIn />
         </button>
       </main>
@@ -54,7 +54,7 @@ const Home: NextPage = () => {
     </Head>
     <main>
       <Header />
-      <div className='py-0 lg:py-10 px-6 sm:px-12'>
+      <div className='pb-20 pt-0 lg:pt-10 px-6 sm:px-12'>
         {isLg ? <TimeTable data={data} /> : <TimeTableMobile data={data} />}
       </div>
     </main>

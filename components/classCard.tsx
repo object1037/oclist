@@ -97,10 +97,9 @@ const ClassCard = ({
   ]
   const labelStyle = [
     'self-start',
-    'font-bold',
-    'text-xl',
-    'mb-4',
-    'mt-2',
+    'font-semibold',
+    'text-lg',
+    'my-2',
     'mx-5'
   ]
 
@@ -117,7 +116,7 @@ const ClassCard = ({
       <input id="class_title" type='text' name="class_title" value={class_title} onChange={(e) => setClass_title(e.target.value)} className={clsx(inputStyle)} />
       <label htmlFor="class_url" className={clsx(labelStyle)}>URL</label>
       <input id="class_url" type='text' name="class_url" value={class_url} onChange={(e) => setClass_url(e.target.value)} className={clsx(inputStyle)} />
-      <button type='submit' className="border border-ppink-200 hover:bg-ppink-200 p-4 text-lg rounded-full transition">
+      <button type='submit' className="border border-ppink-200 hover:bg-ppink-200 p-4 text-lg rounded-full transition" aria-label="done button">
         <FiCheck />
       </button>
     </form>
@@ -126,7 +125,7 @@ const ClassCard = ({
   if (!classData || (!classData.class_title && !classData.class_url)) {
     return (
       <>
-      <button className="group bg-gray-800 rounded-lg h-32 outline-none" onClick={() => openModal()}>
+      <button className="group bg-gray-800 rounded-lg h-32 outline-none" onClick={() => openModal()} aria-label={`add class data at index of ${class_time}`}>
         <div className="invisible group-hover:visible flex justify-center text-2xl transition">
           <FiPlus />
         </div>
@@ -138,10 +137,10 @@ const ClassCard = ({
   return (
     <>
     <div className="bg-gray-800 rounded-lg flex flex-row h-32">
-      <button className="basis-5/6 hover:bg-gray-700 rounded-l-lg transition" onClick={() => openWindow()}>
+      <button className="basis-5/6 hover:bg-gray-700 rounded-l-lg transition" onClick={() => openWindow()} aria-label='open class url'>
         <p className="p-4 text-left text-lg font-semibold block h-full break-all overflow-hidden">{class_title}</p>
       </button>
-      <button onClick={() => openModal()} className="flex justify-center items-center hover:bg-gray-700 basis-1/6 rounded-r-lg outline-none transition text-lg">
+      <button onClick={() => openModal()} className="flex justify-center items-center hover:bg-gray-700 basis-1/6 rounded-r-lg outline-none transition text-lg" aria-label='edit class data'>
         <FiEdit />
       </button>
       {modal}
