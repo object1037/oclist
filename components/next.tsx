@@ -72,6 +72,13 @@ const Next = ({
         }
       }
     }
+
+    for (let i = 0; i < 36; i++) {
+      if (data[i]?.class_title || data[i]?.class_url) {
+        setNextTime(i)
+        return
+      }
+    }
   }, [times, data, time])
 
   if (!data || !account || nextTime === -1 || time === 100000) {
