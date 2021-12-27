@@ -55,7 +55,7 @@ const Home: NextPage = () => {
     </Head>
     <main>
       <Header image={session!.user!.image!} />
-      <div className='pt-6 lg:pt-10 pb-20 px-6 sm:px-12'>
+      <div className='pt-10 pb-20 px-6 sm:px-12'>
         <Next data={data} />
         {isLg ? <TimeTable data={data} /> : <TimeTableMobile data={data} />}
       </div>

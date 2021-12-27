@@ -8,10 +8,12 @@ Modal.setAppElement('#__next');
 
 const ClassCard = ({
   classData,
-  class_time
+  class_time,
+  small
 }: {
   classData: classData
   class_time: number
+  small?: boolean
 }) => {
   const [class_title, setClass_title] = useState(classData ? classData.class_title : '')
   const [class_url, setClass_url] = useState(classData ? classData.class_url : '')
@@ -103,6 +105,24 @@ const ClassCard = ({
     'mx-5'
   ]
 
+  const cardLeft = [
+    'hover:bg-gray-700',
+    'rounded-l-lg',
+    'transition',
+    small ? 'basis-3/4' : 'basis-5/6',
+  ]
+  const cardRight = [
+    'flex',
+    'justify-center',
+    'items-center',
+    'hover:bg-gray-700',
+    'rounded-r-lg',
+    'outline-none',
+    'transition',
+    'text-lg',
+    small ? 'basis-1/4' : 'basis-1/6',
+  ]
+
   const modal = 
   <Modal
     isOpen={modalIsOpen}
@@ -137,10 +157,10 @@ const ClassCard = ({
   return (
     <>
     <div className="bg-gray-800 rounded-lg flex flex-row h-32">
-      <button className="basis-5/6 hover:bg-gray-700 rounded-l-lg transition" onClick={() => openWindow()} aria-label='open class url'>
+      <button className={clsx(cardLeft)} onClick={() => openWindow()} aria-label='open class url'>
         <p className="p-4 text-left text-lg font-semibold block h-full break-all overflow-hidden">{class_title}</p>
       </button>
-      <button onClick={() => openModal()} className="flex justify-center items-center hover:bg-gray-700 basis-1/6 rounded-r-lg outline-none transition text-lg" aria-label='edit class data'>
+      <button onClick={() => openModal()} className={clsx(cardRight)} aria-label='edit class data'>
         <FiEdit />
       </button>
       {modal}

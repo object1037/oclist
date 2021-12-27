@@ -4,8 +4,13 @@ import { FiCheck } from "react-icons/fi"
 import axios from "axios"
 
 const inputStyle = [
-  'bg-gray-800',
   'rounded-full',
+  'px-4',
+  'py-2',
+  'bg-gray-800',
+  'border-0',
+  'focus:ring-0',
+  'text-lg'
 ]
 const labelStyle = [
   'font-semibold'
