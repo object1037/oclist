@@ -2,6 +2,7 @@ import ClassCard from "./classCard"
 import axios from "axios"
 import useSWR from "swr"
 import { useEffect, useState, useMemo } from "react"
+import { FiArrowDown } from 'react-icons/fi'
 
 const fetcher = (url: string) => axios.get(url).then(res => res.data)
 
@@ -86,7 +87,7 @@ const Next = ({
   if (!data || !account || nextTime === -1) {
     return (
       <div className="flex flex-col max-w-xl mx-auto mb-6 lg:mb-12">
-        <h2 className="font-bold text-3xl mb-6">Next</h2>
+        <h2 className="font-bold text-3xl mb-6 flex justify-between items-center h-12">Next</h2>
         <div className="animate-pulse bg-gray-800 rounded-lg h-32"></div>
       </div>
     )
@@ -95,7 +96,14 @@ const Next = ({
   return (
     <>
     <div className="flex flex-col max-w-xl mx-auto mb-6 lg:mb-12">
-      <h2 className="font-bold text-3xl mb-6">Next</h2>
+      <div className="mb-6 flex justify-between items-center h-12">
+        <h2 className="font-bold text-3xl">Next</h2>
+        {nextTime !== -2 &&
+        <a href={`#${nextTime}`} className="text-lg w-10 h-10 flex justify-center items-center rounded-full bg-gray-800 hover:bg-gray-700 transition">
+          <FiArrowDown />
+        </a>
+        }
+      </div>
       {nextTime === -2 ? 
       <div className="border border-gray-700 rounded-lg h-32 p-4 flex items-center justify-center">
         <p className="text-lg text-center text-gray-400">Click the timetable below to add class information.</p>

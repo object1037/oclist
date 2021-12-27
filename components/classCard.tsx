@@ -9,11 +9,13 @@ Modal.setAppElement('#__next');
 const ClassCard = ({
   classData,
   class_time,
-  small
+  small,
+  id
 }: {
   classData: classData
   class_time: number
   small?: boolean
+  id?: string
 }) => {
   const [class_title, setClass_title] = useState(classData ? classData.class_title : '')
   const [class_url, setClass_url] = useState(classData ? classData.class_url : '')
@@ -147,7 +149,7 @@ const ClassCard = ({
   if (!class_title && !class_url) {
     return (
       <>
-      <button className="group bg-gray-800 rounded-xl h-32 outline-none" onClick={() => openModal()} aria-label={`add class data at index of ${class_time}`}>
+      <button id={id} className="group bg-gray-800 rounded-xl h-32 outline-none" onClick={() => openModal()} aria-label={`add class data at index of ${class_time}`}>
         <div className="invisible group-hover:visible flex justify-center text-2xl transition">
           <FiPlus />
         </div>
@@ -158,7 +160,7 @@ const ClassCard = ({
   }
   return (
     <>
-    <div className="bg-gray-800 rounded-xl flex flex-row h-32">
+    <div id={id} className="bg-gray-800 rounded-xl flex flex-row h-32">
       <button className={clsx(cardLeft)} onClick={() => openWindow()} aria-label='open class url'>
         <p className="p-4 text-left text-lg font-semibold block h-full break-all overflow-hidden">{class_title}</p>
       </button>

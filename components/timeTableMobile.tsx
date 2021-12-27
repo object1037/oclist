@@ -53,12 +53,12 @@ const TimeTableMobile = ({
               <div className={clsx(labelStyle, (index / 6) === day && 'border border-ppink-200')}>
                 {weekDays[index / 6]}
               </div>
-              <ClassCard classData={classData} class_time={index} />
+              <ClassCard id={String(index)} classData={classData} class_time={index} />
             </div>
           )
         }
         return (
-          <ClassCard classData={classData} class_time={index} key={classData?.class_url ? classData.class_url : `class${index}`} />
+          <ClassCard id={String(index)} classData={classData} class_time={index} key={classData?.class_url ? classData.class_url : `class${index}`} />
         )
       })}
     </div>
