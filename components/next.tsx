@@ -10,7 +10,8 @@ const Next = ({
 }: {
   data: classData[] | undefined
 }) => {
-  const [time, setTime] = useState(0)
+  const [time, setTime] = useState(100000)
+  const [nextTime, setNextTime] = useState(-1)
 
   useEffect(() => {
     const now = new Date()
@@ -22,9 +23,9 @@ const Next = ({
 
   const { data: account, error } = useSWR('/api/get-settings', fetcher)
 
-  let nextTime = useMemo(() => {
+  const times = useMemo(() => {
     if (!account || !data) {
-      return -1
+      return
     }
 
     const settings = [
@@ -35,30 +36,45 @@ const Next = ({
       account[0].range_4,
       account[0].range_5,
     ]
-  
-    let times = new Array()
+
+    let timesSub = new Array()
 
     for (let i = 0; i < 6; i++) {
-      times.push(new Array())
+      timesSub.push(new Array())
     }  
 
     for (let i = 0; i < 6; i++) {
       for (let j = 0; j < 6; j++) {
-        times[i].push({
-          start: settings[j].substring(0, 5),
-          end: settings[j].substring(6),
+        const startHour = +settings[j].substring(0, 2)
+        const startMinute = +settings[j].substring(3, 5)
+        const endHour = +settings[j].substring(6, 8)
+        const endMinute = +settings[j].substring(9)
+
+        timesSub[i].push({
+          start: 24 * 60 * i + 60 * startHour + startMinute,
+          end: 24 * 60 * i + 60 * endHour + endMinute,
         })
-        const startTime = 24 * 60 * i + +settings[j].substring(0, 2) * 60 + +settings[j].substring(3, 5)
-        if (time < startTime && (data[i * 6 + j]?.class_url || data[i * 6 + j]?.class_title)) {
-          return (i * 6 + j)
-        }
       }
     }
 
-    return 0
-  }, [account, time, data])
+    return timesSub
+  }, [account, data])
 
-  if (!data || !account) {
+  useEffect(() => {
+    if (!times || !data) {
+      return
+    }
+    for (let i = 0; i < 6; i++) {
+      for (let j = 0; j < 6; j++) {
+        if (time < times[i][j].start && (data[i * 6 + j]?.class_title || data[i * 6 + j]?.class_url)) {
+          setNextTime(i * 6 + j)
+          return
+        }
+      }
+    }
+  }, [times, data, time])
+
+  if (!data || !account || nextTime === -1 || time === 100000) {
     return (
       <div className="flex flex-col max-w-xl mx-auto mb-12">
         <h2 className="font-bold text-3xl mb-6">Next</h2>
