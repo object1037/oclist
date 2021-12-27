@@ -66,8 +66,10 @@ const ClassCard = ({
     'w-full',
     'mx-auto',
     'md:max-w-2xl',
-    'p-4',
-    'sm:p-8',
+    'px-4',
+    'pb-8',
+    'pt-6',
+    'sm:px-8',
     'max-h-full',
     'overflow-auto'
   ]

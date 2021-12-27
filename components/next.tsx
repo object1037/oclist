@@ -85,7 +85,7 @@ const Next = ({
 
   if (!data || !account || nextTime === -1) {
     return (
-      <div className="flex flex-col max-w-xl mx-auto mb-12">
+      <div className="flex flex-col max-w-xl mx-auto mb-6 lg:mb-12">
         <h2 className="font-bold text-3xl mb-6">Next</h2>
         <div className="animate-pulse bg-gray-800 rounded-lg h-32"></div>
       </div>
@@ -94,7 +94,7 @@ const Next = ({
 
   return (
     <>
-    <div className="flex flex-col max-w-xl mx-auto mb-12">
+    <div className="flex flex-col max-w-xl mx-auto mb-6 lg:mb-12">
       <h2 className="font-bold text-3xl mb-6">Next</h2>
       {nextTime === -2 ? 
       <div className="border border-gray-700 rounded-lg h-32 p-4 flex items-center justify-center">
