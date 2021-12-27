@@ -69,6 +69,7 @@ const Profile = () => {
     e.preventDefault()
     try {
       axios.get('/api/delete_account')
+      closeModal()
       signOut()
     } catch (e) {
       throw Error(String(e))
