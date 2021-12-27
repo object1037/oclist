@@ -61,7 +61,7 @@ const Next = ({
   }, [account, data])
 
   useEffect(() => {
-    if (!times || !data) {
+    if (!times || !data || time === 100000) {
       return
     }
     for (let i = 0; i < 6; i++) {
@@ -79,9 +79,11 @@ const Next = ({
         return
       }
     }
+
+    setNextTime(-2)
   }, [times, data, time])
 
-  if (!data || !account || nextTime === -1 || time === 100000) {
+  if (!data || !account || nextTime === -1) {
     return (
       <div className="flex flex-col max-w-xl mx-auto mb-12">
         <h2 className="font-bold text-3xl mb-6">Next</h2>
@@ -94,7 +96,12 @@ const Next = ({
     <>
     <div className="flex flex-col max-w-xl mx-auto mb-12">
       <h2 className="font-bold text-3xl mb-6">Next</h2>
+      {nextTime === -2 ? 
+      <div className="border border-gray-700 rounded-lg h-32 flex items-center justify-center">
+        <p className="text-lg text-center text-gray-400">Click the timetable below to add class information.</p>
+      </div> : 
       <ClassCard classData={data[nextTime]} class_time={nextTime}/>
+      }
     </div>
     </>
   )
