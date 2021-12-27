@@ -21,9 +21,16 @@ const Home: NextPage = () => {
 
   if (status === "loading") {
     return (
+      <>
+      <Head>
+        <title>oclist</title>
+        <meta name="description" content="online class list" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <div className='flex justify-center py-24'>
         Loading...
       </div>
+      </>
     )
   }
 

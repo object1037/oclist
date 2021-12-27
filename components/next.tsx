@@ -49,7 +49,7 @@ const Next = ({
           end: settings[j].substring(6),
         })
         const startTime = 24 * 60 * i + +settings[j].substring(0, 2) * 60 + +settings[j].substring(3, 5)
-        if (time < startTime && (data[i * 6 + j].class_url || data[i * 6 + j].class_title)) {
+        if (time < startTime && (data[i * 6 + j]?.class_url || data[i * 6 + j]?.class_title)) {
           return (i * 6 + j)
         }
       }

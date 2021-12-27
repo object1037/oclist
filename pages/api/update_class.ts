@@ -33,7 +33,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           const [rows, fields] = await conn.query(query.sql, query.values)
         } else {
           const query = SQL`
-          insert into class (class_time, class_title, class_url, account_id)
+          insert into class (class_time, class_title, class_url, account_email)
           values (${class_time}, ${class_title}, ${class_url}, ${session.user?.email});
           `
           const [rows, fields] = await conn.query(query.sql, query.values)

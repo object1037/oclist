@@ -16,15 +16,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (method) {
     case 'GET':
       try {
-        const query = SQL`select * from class where account_email=${session?.user?.email};`
-        const [getRows, _] = await conn.query(query.sql, query.values)
-        const classes = new Array(36)
-        getRows.forEach((element: classData) => {
-          classes[element.class_time] = element
-        });
-        res.status(200).json(classes)
+        const query = SQL`DELETE FROM account WHERE account_email = ${session.user?.email};`
+        const query2 = SQL`DELETE FROM class WHERE account_email = ${session.user?.email};`
+        const [rows, cols] = await conn.query(query.sql, query.values)
+        const [rows2, cols2] = await conn.query(query2.sql, query2.values)
+        res.status(200).json({ message: 'successfuly deleted account' })
       } catch (e) {
-        res.status(500).json({ message: 'An error occurred while connecting to the database' })
+        res.status(500).json({ message: String(e) })
       }
 
       break
