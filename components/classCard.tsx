@@ -107,7 +107,7 @@ const ClassCard = ({
 
   const cardLeft = [
     'hover:bg-gray-700',
-    'rounded-l-lg',
+    'rounded-l-xl',
     'transition',
     small ? 'basis-3/4' : 'basis-5/6',
   ]
@@ -116,7 +116,7 @@ const ClassCard = ({
     'justify-center',
     'items-center',
     'hover:bg-gray-700',
-    'rounded-r-lg',
+    'rounded-r-xl',
     'outline-none',
     'transition',
     'text-lg',
@@ -145,7 +145,7 @@ const ClassCard = ({
   if (!class_title && !class_url) {
     return (
       <>
-      <button className="group bg-gray-800 rounded-lg h-32 outline-none" onClick={() => openModal()} aria-label={`add class data at index of ${class_time}`}>
+      <button className="group bg-gray-800 rounded-xl h-32 outline-none" onClick={() => openModal()} aria-label={`add class data at index of ${class_time}`}>
         <div className="invisible group-hover:visible flex justify-center text-2xl transition">
           <FiPlus />
         </div>
@@ -156,7 +156,7 @@ const ClassCard = ({
   }
   return (
     <>
-    <div className="bg-gray-800 rounded-lg flex flex-row h-32">
+    <div className="bg-gray-800 rounded-xl flex flex-row h-32">
       <button className={clsx(cardLeft)} onClick={() => openWindow()} aria-label='open class url'>
         <p className="p-4 text-left text-lg font-semibold block h-full break-all overflow-hidden">{class_title}</p>
       </button>
