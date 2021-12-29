@@ -145,8 +145,7 @@ const ClassCard = ({
     small ? 'basis-1/4' : 'basis-1/6',
   ]
 
-  /*
-  const modal = 
+  const FormModal = 
   <Modal
     isOpen={modalIsOpen}
     onRequestClose={closeModal}
@@ -164,7 +163,6 @@ const ClassCard = ({
       </button>
     </form>
   </Modal>
-  */
 
   if (isEmpty) {
     return (
@@ -174,24 +172,7 @@ const ClassCard = ({
           <FiPlus />
         </div>
       </button>
-      <Modal
-    isOpen={modalIsOpen}
-    onRequestClose={closeModal}
-    contentLabel="Modal"
-    className={clsx(modalStyle)}
-    overlayClassName={clsx(overlayStyle)}
-    key={class_time}
-  >
-    <form onSubmit={submitHandler} className="flex flex-col items-center">
-      <label htmlFor="class_title" className={clsx(labelStyle)}>Name</label>
-      <input id="class_title" type='text' name="class_title" value={class_title} onChange={(e) => setClass_title(e.target.value)} className={clsx(inputStyle)} />
-      <label htmlFor="class_url" className={clsx(labelStyle)}>URL</label>
-      <input id="class_url" type='text' name="class_url" value={class_url} onChange={(e) => setClass_url(e.target.value)} className={clsx(inputStyle)} />
-      <button type='submit' className="border border-ppink-200 hover:bg-ppink-200 p-4 text-lg rounded-full transition" aria-label="done button">
-        <FiCheck />
-      </button>
-    </form>
-  </Modal>
+      {FormModal}
       </>
     )
   }
@@ -205,24 +186,7 @@ const ClassCard = ({
       <button onClick={() => openModal()} className={clsx(cardRight)} aria-label='edit class data'>
         <FiEdit />
       </button>
-      <Modal
-    isOpen={modalIsOpen}
-    onRequestClose={closeModal}
-    contentLabel="Modal"
-    className={clsx(modalStyle)}
-    overlayClassName={clsx(overlayStyle)}
-    key={class_time}
-  >
-    <form onSubmit={submitHandler} className="flex flex-col items-center">
-      <label htmlFor="class_title" className={clsx(labelStyle)}>Name</label>
-      <input id="class_title" type='text' name="class_title" value={class_title} onChange={(e) => setClass_title(e.target.value)} className={clsx(inputStyle)} />
-      <label htmlFor="class_url" className={clsx(labelStyle)}>URL</label>
-      <input id="class_url" type='text' name="class_url" value={class_url} onChange={(e) => setClass_url(e.target.value)} className={clsx(inputStyle)} />
-      <button type='submit' className="border border-ppink-200 hover:bg-ppink-200 p-4 text-lg rounded-full transition" aria-label="done button">
-        <FiCheck />
-      </button>
-    </form>
-  </Modal>
+      {FormModal}
     </div>
     </>
   )
