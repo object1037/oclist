@@ -16,7 +16,7 @@ Modal.setAppElement('#__next');
 const Profile = () => {
   const {data: session, status} = useSession()
   const loggedIn = session ? true : false
-  const { data, error } = useSWR(loggedIn ? '/api/get-settings' : null)
+  const { data, error } = useSWR<account[]>(loggedIn ? '/api/get-settings' : null)
   const router = useRouter()
   const [modalIsOpen, setIsOpen] = useState(false)
 

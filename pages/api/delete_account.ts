@@ -11,7 +11,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     method
   } = req
   if (!session) {
-    return res.status(200).end()
+    return res.status(401).end()
   }
   switch (method) {
     case 'GET':
