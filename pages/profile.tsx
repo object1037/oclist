@@ -13,12 +13,10 @@ import clsx from 'clsx'
  
 Modal.setAppElement('#__next');
 
-const fetcher = (url: string) => axios.get(url).then(res => res.data)
-
 const Profile = () => {
   const {data: session, status} = useSession()
   const loggedIn = session ? true : false
-  const { data, error } = useSWR(loggedIn ? '/api/get-settings' : null, fetcher)
+  const { data, error } = useSWR(loggedIn ? '/api/get-settings' : null)
   const router = useRouter()
   const [modalIsOpen, setIsOpen] = useState(false)
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FiEdit, FiPlus, FiCheck } from 'react-icons/fi'
 import Modal from 'react-modal'
 import axios from 'axios'
@@ -17,8 +17,19 @@ const ClassCard = ({
   small?: boolean
   id?: string
 }) => {
+  let c_time_var = class_time
+  const [c_time_state, setC_time_state] = useState(class_time)
   const [class_title, setClass_title] = useState(classData ? classData.class_title : '')
   const [class_url, setClass_url] = useState(classData ? classData.class_url : '')
+
+  useEffect(() => {
+    if (c_time_var != c_time_state) {
+      setC_time_state(c_time_var)
+      setClass_title(classData?.class_title)
+      setClass_url(classData?.class_url)
+      console.log('update')
+    }
+  }, [c_time_state, c_time_var, classData])
 
   const [modalIsOpen, setIsOpen] = useState(false)
 

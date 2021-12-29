@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useSession } from 'next-auth/react'
-import axios from 'axios'
 import { signIn } from "next-auth/react"
 import useSWR from 'swr'
 import TimeTable from '../components/timeTable'
@@ -11,12 +10,10 @@ import Header from '../components/header'
 import { FiLogIn } from 'react-icons/fi'
 import { useMediaQuery } from 'react-responsive'
 
-const fetcher = (url: string) => axios.get(url).then(res => res.data)
-
 const Home: NextPage = () => {
   const {data: session, status} = useSession()
   const loggedIn = session ? true : false
-  const { data, error } = useSWR<classData[]>(loggedIn ? '/api/get-classes' : null, fetcher)
+  const { data, error } = useSWR<classData[]>(loggedIn ? '/api/get-classes' : null)
   const isLg = useMediaQuery({ query: '(min-width: 1024px)' })
 
   if (status === "loading") {

@@ -1,10 +1,7 @@
 import ClassCard from "./classCard"
-import axios from "axios"
 import useSWR from "swr"
 import { useEffect, useState, useMemo } from "react"
 import { FiArrowDown } from 'react-icons/fi'
-
-const fetcher = (url: string) => axios.get(url).then(res => res.data)
 
 const Next = ({
   data
@@ -22,7 +19,7 @@ const Next = ({
     setTime(day * 24 * 60 + hour * 60 + minute)
   }, [])
 
-  const { data: account, error } = useSWR('/api/get-settings', fetcher)
+  const { data: account, error } = useSWR('/api/get-settings')
 
   const times = useMemo(() => {
     if (!account || !data) {
@@ -103,7 +100,7 @@ const Next = ({
       </div>
       {nextTime === -2 ? 
       <div className="border border-gray-700 rounded-lg h-32 p-4 flex items-center justify-center">
-        <p className="text-lg text-center text-gray-400">Click the timetable below to add class information.</p>
+        <p className="text-base text-center text-gray-400">Click cells in the timetable below to add class information.</p>
       </div> : 
       <ClassCard classData={data[nextTime]} class_time={nextTime}/>
       }
