@@ -3,6 +3,7 @@ import { FiEdit, FiPlus, FiCheck } from 'react-icons/fi'
 import Modal from 'react-modal'
 import axios from 'axios'
 import clsx from 'clsx'
+import { mutate } from "swr";
 
 Modal.setAppElement('#__next');
 
@@ -23,11 +24,15 @@ const ClassCard = ({
   const [class_url, setClass_url] = useState(classData ? classData.class_url : '')
 
   useEffect(() => {
+    setClass_title(classData ? classData.class_title : '')
+    setClass_url(classData ? classData.class_url : '')
+  }, [classData])
+
+  useEffect(() => {
     if (c_time_var != c_time_state) {
       setC_time_state(c_time_var)
       setClass_title(classData?.class_title)
       setClass_url(classData?.class_url)
-      console.log('update')
     }
   }, [c_time_state, c_time_var, classData])
 
@@ -65,6 +70,7 @@ const ClassCard = ({
         class_url: class_url,
       })
       closeModal()
+      mutate('/api/get-classes')
     } catch (e) {
       throw Error(String(e))
     }
@@ -169,6 +175,7 @@ const ClassCard = ({
       </>
     )
   }
+
   return (
     <>
     <div id={id} className="bg-gray-800 rounded-xl flex flex-row h-32">
