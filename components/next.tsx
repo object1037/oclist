@@ -47,13 +47,10 @@ const Next = ({
     for (let i = 0; i < 6; i++) {
       for (let j = 0; j < 6; j++) {
         const startHour = +settings[j].substring(0, 2)
-        const startMinute = +settings[j].substring(3, 5)
-        const endHour = +settings[j].substring(6, 8)
-        const endMinute = +settings[j].substring(9)
+        const startMinute = +settings[j].substring(3)
 
         timesSub[i].push({
           start: 24 * 60 * i + 60 * startHour + startMinute,
-          end: 24 * 60 * i + 60 * endHour + endMinute,
         })
       }
     }

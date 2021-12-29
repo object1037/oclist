@@ -117,17 +117,17 @@ const Profile = () => {
     <main>
       <Header image={session!.user!.image!} />
       <div className='py-20 px-6 sm:px-12 max-w-5xl mx-auto'>
-        <h2 className='text-3xl font-semibold mb-8'>Settings</h2>
+        <h2 className='text-3xl font-semibold mb-10'>Settings</h2>
         <Setting data={data} />
-        <div className='flex flex-col mt-20'>
+        <div className='mt-20'>
           <h2 className='text-3xl font-semibold mb-8'>Log out</h2>
-          <button onClick={() => signOut()} className='self-center border border-ppink-200 hover:bg-ppink-200 text-xl p-4 rounded-full transition' aria-label='Sign out button'>
+          <button onClick={() => signOut()} className='mx-6 border border-ppink-200 hover:bg-ppink-200 text-xl p-4 rounded-full transition' aria-label='Sign out button'>
             <FiLogOut />
           </button>
         </div>
-        <div className='flex flex-col mt-20'>
+        <div className='mt-20'>
           <h2 className='text-3xl font-semibold mb-8'>Delete account</h2>
-          <button onClick={() => openModal()} className='self-center border border-ppink-200 hover:bg-ppink-200 text-xl p-4 rounded-full transition' aria-label='Delete account button'>
+          <button onClick={() => openModal()} className='mx-6 border border-ppink-200 hover:bg-ppink-200 text-xl p-4 rounded-full transition' aria-label='Delete account button'>
             <FiTrash />
           </button>
           <Modal
