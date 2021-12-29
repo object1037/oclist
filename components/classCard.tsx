@@ -157,7 +157,7 @@ const ClassCard = ({
       <label htmlFor="class_title" className={clsx(labelStyle)}>Name</label>
       <input id="class_title" type='text' name="class_title" value={class_title} onChange={(e) => setClass_title(e.target.value)} className={clsx(inputStyle)} />
       <label htmlFor="class_url" className={clsx(labelStyle)}>URL</label>
-      <input id="class_url" type='text' name="class_url" value={class_url} onChange={(e) => setClass_url(e.target.value)} className={clsx(inputStyle)} />
+      <input id="class_url" type='url' name="class_url" value={class_url} onChange={(e) => setClass_url(e.target.value)} className={clsx(inputStyle)} />
       <button type='submit' className="border border-ppink-200 hover:bg-ppink-200 p-4 text-lg rounded-full transition" aria-label="done button">
         <FiCheck />
       </button>
