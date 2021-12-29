@@ -68,7 +68,7 @@ const TimeTable = ({
           )
         }
         return (
-          <ClassCard id={String(index)} small classData={classData} class_time={index} key={classData?.class_url ? classData.class_url : `class${index}`} />
+          <ClassCard id={String(index)} small classData={classData} class_time={index} key={`class${index}`} />
         )
       })}
     </div>

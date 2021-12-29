@@ -22,10 +22,12 @@ const ClassCard = ({
   const [c_time_state, setC_time_state] = useState(class_time)
   const [class_title, setClass_title] = useState(classData ? classData.class_title : '')
   const [class_url, setClass_url] = useState(classData ? classData.class_url : '')
+  const [isEmpty, setIsEmpty] = useState(!classData?.class_title && !classData?.class_url)
 
   useEffect(() => {
     setClass_title(classData ? classData.class_title : '')
     setClass_url(classData ? classData.class_url : '')
+    setIsEmpty(!classData?.class_title && !classData?.class_url)
   }, [classData])
 
   useEffect(() => {
@@ -68,9 +70,8 @@ const ClassCard = ({
         class_time: class_time,
         class_title: class_title,
         class_url: class_url,
-      })
+      }).then(() => mutate('/api/get-classes'))
       closeModal()
-      mutate('/api/get-classes')
     } catch (e) {
       throw Error(String(e))
     }
@@ -144,6 +145,7 @@ const ClassCard = ({
     small ? 'basis-1/4' : 'basis-1/6',
   ]
 
+  /*
   const modal = 
   <Modal
     isOpen={modalIsOpen}
@@ -162,8 +164,9 @@ const ClassCard = ({
       </button>
     </form>
   </Modal>
+  */
 
-  if (!class_title && !class_url) {
+  if (isEmpty) {
     return (
       <>
       <button id={id} className="group bg-gray-800 rounded-xl h-32 outline-none" onClick={() => openModal()} aria-label={`add class data at index of ${class_time}`}>
@@ -171,7 +174,24 @@ const ClassCard = ({
           <FiPlus />
         </div>
       </button>
-      {modal}
+      <Modal
+    isOpen={modalIsOpen}
+    onRequestClose={closeModal}
+    contentLabel="Modal"
+    className={clsx(modalStyle)}
+    overlayClassName={clsx(overlayStyle)}
+    key={class_time}
+  >
+    <form onSubmit={submitHandler} className="flex flex-col items-center">
+      <label htmlFor="class_title" className={clsx(labelStyle)}>Name</label>
+      <input id="class_title" type='text' name="class_title" value={class_title} onChange={(e) => setClass_title(e.target.value)} className={clsx(inputStyle)} />
+      <label htmlFor="class_url" className={clsx(labelStyle)}>URL</label>
+      <input id="class_url" type='text' name="class_url" value={class_url} onChange={(e) => setClass_url(e.target.value)} className={clsx(inputStyle)} />
+      <button type='submit' className="border border-ppink-200 hover:bg-ppink-200 p-4 text-lg rounded-full transition" aria-label="done button">
+        <FiCheck />
+      </button>
+    </form>
+  </Modal>
       </>
     )
   }
@@ -185,7 +205,24 @@ const ClassCard = ({
       <button onClick={() => openModal()} className={clsx(cardRight)} aria-label='edit class data'>
         <FiEdit />
       </button>
-      {modal}
+      <Modal
+    isOpen={modalIsOpen}
+    onRequestClose={closeModal}
+    contentLabel="Modal"
+    className={clsx(modalStyle)}
+    overlayClassName={clsx(overlayStyle)}
+    key={class_time}
+  >
+    <form onSubmit={submitHandler} className="flex flex-col items-center">
+      <label htmlFor="class_title" className={clsx(labelStyle)}>Name</label>
+      <input id="class_title" type='text' name="class_title" value={class_title} onChange={(e) => setClass_title(e.target.value)} className={clsx(inputStyle)} />
+      <label htmlFor="class_url" className={clsx(labelStyle)}>URL</label>
+      <input id="class_url" type='text' name="class_url" value={class_url} onChange={(e) => setClass_url(e.target.value)} className={clsx(inputStyle)} />
+      <button type='submit' className="border border-ppink-200 hover:bg-ppink-200 p-4 text-lg rounded-full transition" aria-label="done button">
+        <FiCheck />
+      </button>
+    </form>
+  </Modal>
     </div>
     </>
   )
