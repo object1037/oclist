@@ -8,7 +8,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="ja" className="h-full flex flex-col text-gray-100 bg-gray-900">
+      <Html lang="ja" className="text-gray-100 bg-gray-900">
         <Head>
           <link
             rel="preload"
@@ -46,7 +46,7 @@ class MyDocument extends Document {
           <meta property='og:url' content='https://oclist.vercel.app' />
           <meta property='og:image' content='https://oclist.vercel.app/icon-512x512.png' />
         </Head>
-        <body className="h-full">
+        <body>
           <Main />
           <NextScript />
         </body>
