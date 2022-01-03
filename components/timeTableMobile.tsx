@@ -40,7 +40,23 @@ const TimeTableMobile = ({
 
   if (!data) {
     return (
-      <div className="flex justify-center mt-12">Loading...</div>
+      <div className="flex flex-col space-y-6 max-w-xl mx-auto">
+      {Array.from({length: 36}, (x, i) => i).map((_, index) => {
+        if (index % 6 === 0) {
+          return (
+            <div className="contents" key={`loadingWeekDayandClass${index}`}>
+              <div className={clsx(labelStyle, (index / 6) === day && 'border border-ppink-200')}>
+                {weekDays[index / 6]}
+              </div>
+              <div className="animate-pulse bg-gray-800 rounded-lg h-32"></div>
+            </div>
+          )
+        }
+        return (
+          <div className="animate-pulse bg-gray-800 rounded-lg h-32" key={`loadingClass${index}`}></div>
+        )
+      })}
+    </div>
     )
   }
   return (

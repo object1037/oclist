@@ -41,7 +41,33 @@ const TimeTable = ({
 
   if (!data) {
     return (
-      <div className="flex justify-center">Loading...</div>
+      <div className="grid grid-rows-ttable grid-cols-ttable grid-flow-col auto-cols-fr gap-4">
+      <div className="contents">
+      {Array.from({length: 7}, (x, i) => i).map((_, index) => {
+        if (index === 0) {
+          return (
+            <div key={`classHour${index}`} />
+          )
+        }
+        return (
+          <div key={`classHour${index}`} className={clsx(labelStyle)}>{index}</div>
+        )
+      })}
+      </div>
+      {Array.from({length: 36}, (x, i) => i).map((_, index) => {
+        if (index % 6 === 0) {
+          return (
+            <div className="contents" key={`loadingWeekDayandClass${index}`}>
+              <div className={clsx(labelStyle, dayLabelStyle, (index / 6) === day && 'border border-ppink-200')}>{weekDays[index / 6]}</div>
+              <div className="animate-pulse bg-gray-800 rounded-lg h-32"></div>
+            </div>
+          )
+        }
+        return (
+          <div className="animate-pulse bg-gray-800 rounded-lg h-32" key={`loadingClass${index}`}></div>
+        )
+      })}
+    </div>
     )
   }
   return (
