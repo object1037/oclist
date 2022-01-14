@@ -45,8 +45,9 @@ const Profile = () => {
     'w-full',
     'mx-auto',
     'md:max-w-2xl',
-    'p-6',
-    'sm:p-12',
+    'px-6',
+    'py-8',
+    'sm:px-8',
     'max-h-full',
     'overflow-auto'
   ]

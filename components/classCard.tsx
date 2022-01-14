@@ -85,6 +85,15 @@ const ClassCard = ({
     }
   }
 
+  const weekDays = [
+    'Mon',
+    'Tue',
+    'Wed',
+    'Thu',
+    'Fri',
+    'Sat'
+  ]
+
   const modalStyle = [
     'bg-gray-900',
     'border',
@@ -94,9 +103,8 @@ const ClassCard = ({
     'w-full',
     'mx-auto',
     'md:max-w-2xl',
-    'px-4',
-    'pb-8',
-    'pt-6',
+    'px-6',
+    'py-8',
     'sm:px-8',
     'max-h-full',
     'overflow-auto'
@@ -124,7 +132,7 @@ const ClassCard = ({
     'bg-gray-800',
     'border-0',
     'focus:ring-0',
-    'mb-8',
+    'mb-6',
     'text-lg'
   ]
   const labelStyle = [
@@ -161,12 +169,13 @@ const ClassCard = ({
     className={clsx(modalStyle)}
     overlayClassName={clsx(overlayStyle)}
   >
+    <p className="font-bold text-2xl mb-6">{`${weekDays[Math.floor(class_time / 6)]} ${class_time % 6 + 1}`}</p>
     <form onSubmit={submitHandler} className="flex flex-col items-center">
       <label htmlFor="class_title" className={clsx(labelStyle)}>Name</label>
       <input autoFocus id="class_title" type='text' name="class_title" value={class_title} onChange={(e) => setClass_title(e.target.value)} className={clsx(inputStyle)} />
       <label htmlFor="class_url" className={clsx(labelStyle)}>URL</label>
       <input id="class_url" type='url' name="class_url" value={class_url} onChange={(e) => setClass_url(e.target.value)} className={clsx(inputStyle)} />
-      <button type='submit' className="border border-ppink-200 hover:bg-ppink-200 p-4 text-xl rounded-full transition" aria-label="done button">
+      <button type='submit' className="border border-ppink-200 hover:bg-ppink-200 mt-2 p-4 text-xl rounded-full transition" aria-label="done button">
         {submitting ? <FiLoader className="animate-spin-slow" /> : <FiCheck />}
       </button>
     </form>
