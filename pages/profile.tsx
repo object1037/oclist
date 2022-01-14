@@ -125,7 +125,7 @@ const Profile = () => {
     <main>
       <Header image={session!.user!.image!} />
       <div className='py-20 px-6 sm:px-12 max-w-5xl mx-auto'>
-        <h2 className='text-3xl font-semibold mb-10'>Settings</h2>
+        <h2 className='text-3xl font-semibold mb-8'>Settings</h2>
         <Setting data={data} />
         <div className='mt-20'>
           <h2 className='text-3xl font-semibold mb-8'>Log out</h2>
@@ -147,6 +147,8 @@ const Profile = () => {
           >
             <form onSubmit={submitHandler} className="flex flex-col items-center">
               <p className={clsx(labelStyle)}>Are you sure?</p>
+              <p className='mb-2'>This action will delete your oclist account and its data.</p>
+              <p className='mb-10'>This will not affect your GitHub account.</p>
               <button type='submit' className="border border-ppink-200 hover:bg-ppink-200 p-4 px-8 text-lg rounded-full transition" aria-label="done button">
                 <p>{deleting ? "Deleting..." : "Yes, delete my account"}</p>
               </button>
