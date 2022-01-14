@@ -1,7 +1,22 @@
 import ClassCard from "./classCard"
 import useSWR from "swr"
-import { useEffect, useState, useMemo } from "react"
+import { useEffect, useState, useMemo, useRef } from "react"
 import { FiArrowDown } from 'react-icons/fi'
+
+const useIntervalBy1s = (callback: () => any) => {
+  const callbackRef = useRef<() => any>(callback);
+  useEffect(() => {
+    callbackRef.current = callback;
+  }, [callback]);
+  
+  useEffect(() => {
+    const tick = () => { callbackRef.current() } 
+    const id = setInterval(tick, 1000);
+    return () => {
+      clearInterval(id);
+    };
+  }, []);
+};
 
 const Next = ({
   data
@@ -10,6 +25,16 @@ const Next = ({
 }) => {
   const [time, setTime] = useState(100000)
   const [nextTime, setNextTime] = useState(-1)
+
+  useIntervalBy1s(() => {
+    const now = new Date()
+    const day = now.getDay() - 1
+    const hour = now.getHours()
+    const minute = now.getMinutes()
+    if (day * 24 * 60 + hour * 60 + minute > time) {
+      setTime(day * 24 * 60 + hour * 60 + minute)
+    }
+  })
 
   useEffect(() => {
     const now = new Date()
