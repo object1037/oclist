@@ -1,6 +1,6 @@
 import { useState } from "react"
 import clsx from 'clsx'
-import { FiCheck } from "react-icons/fi"
+import { FiCheck, FiLoader } from "react-icons/fi"
 import axios from "axios"
 
 const inputStyle = [
@@ -27,6 +27,8 @@ const SettingForm = ({
 }: {
   data: account[]
 }) => {
+  const [submitting, setSubmitting] = useState(false)
+
   const [range0, setRange0] = useState(data[0].range_0.substring(0, 5))
   const [range1, setRange1] = useState(data[0].range_1.substring(0, 5))
   const [range2, setRange2] = useState(data[0].range_2.substring(0, 5))
@@ -36,6 +38,7 @@ const SettingForm = ({
 
   function submitHandler(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    setSubmitting(true)
     const range_0 = range0
     const range_1 = range1
     const range_2 = range2
@@ -52,7 +55,7 @@ const SettingForm = ({
         range_3: range_3,
         range_4: range_4,
         range_5: range_5
-      })
+      }).then(() => setSubmitting(false))
     } catch (e) {
       throw Error(String(e))
     }
@@ -90,8 +93,8 @@ const SettingForm = ({
         <input id="range5" type='time' name="range5" value={range5} onChange={(e) => setRange5(e.target.value)} className={clsx(inputStyle)} />
       </div>
 
-      <button type='submit' className="mt-4 border border-ppink-200 hover:bg-ppink-200 p-4 text-lg rounded-full transition" aria-label="done button">
-        <FiCheck />
+      <button type='submit' className="mt-4 border border-ppink-200 hover:bg-ppink-200 p-4 text-xl rounded-full transition" aria-label="done button">
+        {submitting ? <FiLoader className="animate-spin-slow" /> : <FiCheck />}
       </button>
     </form>
   )

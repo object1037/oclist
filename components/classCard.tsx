@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FiEdit, FiPlus, FiCheck } from 'react-icons/fi'
+import { FiEdit, FiPlus, FiCheck, FiLoader } from 'react-icons/fi'
 import Modal from 'react-modal'
 import axios from 'axios'
 import clsx from 'clsx'
@@ -19,6 +19,9 @@ const ClassCard = ({
   id?: string
 }) => {
   let c_time_var = class_time
+
+  const [submitting, setSubmitting] = useState(false)
+
   const [c_time_state, setC_time_state] = useState(class_time)
   const [class_title, setClass_title] = useState(classData ? classData.class_title : '')
   const [class_url, setClass_url] = useState(classData ? classData.class_url : '')
@@ -64,14 +67,19 @@ const ClassCard = ({
 
   function submitHandler(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    setSubmitting(true)
+
     try {
       axios.post('/api/update_class', {
         id: classData ? classData.id : null,
         class_time: class_time,
         class_title: class_title,
         class_url: class_url,
-      }).then(() => mutate('/api/get-classes'))
-      closeModal()
+      }).then(() => mutate('/api/get-classes')
+        .then(() => {
+          setSubmitting(false)
+          closeModal()
+        }))
     } catch (e) {
       throw Error(String(e))
     }
@@ -158,8 +166,8 @@ const ClassCard = ({
       <input autoFocus id="class_title" type='text' name="class_title" value={class_title} onChange={(e) => setClass_title(e.target.value)} className={clsx(inputStyle)} />
       <label htmlFor="class_url" className={clsx(labelStyle)}>URL</label>
       <input id="class_url" type='url' name="class_url" value={class_url} onChange={(e) => setClass_url(e.target.value)} className={clsx(inputStyle)} />
-      <button type='submit' className="border border-ppink-200 hover:bg-ppink-200 p-4 text-lg rounded-full transition" aria-label="done button">
-        <FiCheck />
+      <button type='submit' className="border border-ppink-200 hover:bg-ppink-200 p-4 text-xl rounded-full transition" aria-label="done button">
+        {submitting ? <FiLoader className="animate-spin-slow" /> : <FiCheck />}
       </button>
     </form>
   </Modal>

@@ -6,7 +6,7 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 import Setting from '../components/setting'
 import { signOut } from "next-auth/react"
-import { FiLogOut, FiTrash } from 'react-icons/fi'
+import { FiLogOut, FiTrash, FiLoader } from 'react-icons/fi'
 import Modal from 'react-modal'
 import { useState } from 'react'
 import clsx from 'clsx'
@@ -19,6 +19,14 @@ const Profile = () => {
   const { data, error } = useSWR<account[]>(loggedIn ? '/api/get-settings' : null)
   const router = useRouter()
   const [modalIsOpen, setIsOpen] = useState(false)
+
+  const [logouting, setLogouting] = useState(false)
+  const [deleting, setDeleting] = useState(false)
+
+  const mySignOut = () => {
+    setLogouting(true)
+    signOut()
+  }
 
   function openModal() {
     setIsOpen(true);
@@ -65,10 +73,12 @@ const Profile = () => {
 
   function submitHandler(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    setDeleting(true)
     try {
-      axios.get('/api/delete_account')
-      closeModal()
-      signOut()
+      axios.get('/api/delete_account').then(() => {
+        closeModal()
+        signOut()
+      })
     } catch (e) {
       throw Error(String(e))
     }
@@ -119,8 +129,8 @@ const Profile = () => {
         <Setting data={data} />
         <div className='mt-20'>
           <h2 className='text-3xl font-semibold mb-8'>Log out</h2>
-          <button onClick={() => signOut()} className='mx-6 border border-ppink-200 hover:bg-ppink-200 text-xl p-4 rounded-full transition' aria-label='Sign out button'>
-            <FiLogOut />
+          <button onClick={() => mySignOut()} className='mx-6 border border-ppink-200 hover:bg-ppink-200 text-xl p-4 rounded-full transition' aria-label='Sign out button'>
+            {logouting ? <FiLoader className="animate-spin-slow" /> : <FiLogOut />}
           </button>
         </div>
         <div className='mt-20'>
@@ -138,7 +148,7 @@ const Profile = () => {
             <form onSubmit={submitHandler} className="flex flex-col items-center">
               <p className={clsx(labelStyle)}>Are you sure?</p>
               <button type='submit' className="border border-ppink-200 hover:bg-ppink-200 p-4 px-8 text-lg rounded-full transition" aria-label="done button">
-                <p>Yes, delete my account</p>
+                <p>{deleting ? "Deleting..." : "Yes, delete my account"}</p>
               </button>
             </form>
           </Modal>

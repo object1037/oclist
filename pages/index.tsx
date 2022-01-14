@@ -7,14 +7,21 @@ import TimeTable from '../components/timeTable'
 import TimeTableMobile from '../components/timeTableMobile'
 import Next from '../components/next'
 import Header from '../components/header'
-import { FiLogIn } from 'react-icons/fi'
+import { FiLogIn, FiLoader } from 'react-icons/fi'
 import { useMediaQuery } from 'react-responsive'
+import { useState } from 'react'
 
 const Home: NextPage = () => {
   const {data: session, status} = useSession()
   const loggedIn = session ? true : false
   const { data, error } = useSWR<classData[]>(loggedIn ? '/api/get-classes' : null)
   const isLg = useMediaQuery({ query: '(min-width: 1024px)' })
+  const [submitting, setSubmitting] = useState(false)
+
+  const mySignIn = () => {
+    setSubmitting(true)
+    signIn('github')
+  }
 
   if (status === "loading") {
     return (
@@ -43,8 +50,8 @@ const Home: NextPage = () => {
         <h1 className='text-5xl font-bold text-center mb-16'>oclist</h1>
         <p className='text-center text-lg text-gray-300 mb-6'>Manage all online class URLs in one place.</p>
         <p className='text-center text-gray-300 mb-10'>Please sign in or create an account with your GitHub account.</p>
-        <button onClick={() => signIn('github')} className='border border-ppink-200 hover:bg-ppink-200 text-xl mx-auto p-4 rounded-full transition' aria-label='Sign in button'>
-          <FiLogIn />
+        <button onClick={() => mySignIn()} className='border border-ppink-200 hover:bg-ppink-200 text-xl mx-auto p-4 rounded-full transition' aria-label='Sign in button'>
+          {submitting ? <FiLoader className="animate-spin-slow" /> : <FiLogIn />}
         </button>
       </main>
       </>
