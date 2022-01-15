@@ -15,6 +15,7 @@ const Home: NextPage = () => {
   const {data: session, status} = useSession()
   const loggedIn = session ? true : false
   const { data, error } = useSWR<classData[]>(loggedIn ? '/api/get-classes' : null)
+  const { data: account, error: accountError } = useSWR<account[]>(loggedIn ? '/api/get-settings' : null)
   const isLg = useMediaQuery({ query: '(min-width: 1024px)' })
   const [submitting, setSubmitting] = useState(false)
 
@@ -67,8 +68,8 @@ const Home: NextPage = () => {
     <main>
       <Header image={session!.user!.image!} />
       <div className='pt-10 pb-20 px-6 sm:px-12'>
-        <Next data={data} />
-        {isLg ? <TimeTable data={data} /> : <TimeTableMobile data={data} />}
+        <Next data={data} account={account} />
+        {isLg ? <TimeTable data={data} account={account} /> : <TimeTableMobile data={data} account={account} />}
       </div>
     </main>
     </>

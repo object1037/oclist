@@ -15,4 +15,5 @@ interface account {
   range_3: string
   range_4: string
   range_5: string
+  autoclose: 0 | 1
 }

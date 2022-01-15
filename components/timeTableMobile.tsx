@@ -26,9 +26,11 @@ const labelStyle = [
 ]
 
 const TimeTableMobile = ({
-  data
+  data,
+  account
 }: {
   data: classData[] | undefined
+  account: account[] | undefined
 }) => {
   const [day, setDay] = useState(-1)
 
@@ -38,7 +40,7 @@ const TimeTableMobile = ({
     setDay(day)
   }, [])
 
-  if (!data) {
+  if (!data || !account) {
     return (
       <div className="flex flex-col space-y-6 max-w-xl mx-auto">
       {Array.from({length: 36}, (x, i) => i).map((_, index) => {
@@ -59,6 +61,7 @@ const TimeTableMobile = ({
     </div>
     )
   }
+  const autoclose = account[0].autoclose
   return (
     <>
     <div className="flex flex-col space-y-6 max-w-xl mx-auto">
@@ -69,12 +72,12 @@ const TimeTableMobile = ({
               <div className={clsx(labelStyle, (index / 6) === day && 'border border-ppink-200')}>
                 {weekDays[index / 6]}
               </div>
-              <ClassCard id={String(index)} classData={classData} class_time={index} />
+              <ClassCard id={String(index)} classData={classData} class_time={index} autoclose={autoclose} />
             </div>
           )
         }
         return (
-          <ClassCard id={String(index)} classData={classData} class_time={index} key={`class${index}`} />
+          <ClassCard id={String(index)} classData={classData} class_time={index} key={`class${index}`} autoclose={autoclose} />
         )
       })}
     </div>

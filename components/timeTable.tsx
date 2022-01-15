@@ -28,9 +28,11 @@ const dayLabelStyle = [
 ]
 
 const TimeTable = ({
-  data
+  data,
+  account
 }: {
   data: classData[] | undefined
+  account: account[] | undefined
 }) => {
   const [day, setDay] = useState(-1)
   useEffect(() => {
@@ -39,7 +41,7 @@ const TimeTable = ({
     setDay(day)
   }, [])
 
-  if (!data) {
+  if (!data || !account) {
     return (
       <div className="grid grid-rows-ttable grid-cols-ttable grid-flow-col auto-cols-fr gap-4">
       <div className="contents">
@@ -70,6 +72,7 @@ const TimeTable = ({
     </div>
     )
   }
+  const autoclose = account[0].autoclose
   return (
     <div className="grid grid-rows-ttable grid-cols-ttable grid-flow-col auto-cols-fr gap-4">
       <div className="contents">
@@ -89,12 +92,12 @@ const TimeTable = ({
           return (
             <div className="contents" key={`weekDayandClass${index}`}>
               <div className={clsx(labelStyle, dayLabelStyle, (index / 6) === day && 'border border-ppink-200')}>{weekDays[index / 6]}</div>
-              <ClassCard id={String(index)} small classData={classData} class_time={index} />
+              <ClassCard id={String(index)} small classData={classData} class_time={index} autoclose={autoclose} />
             </div>
           )
         }
         return (
-          <ClassCard id={String(index)} small classData={classData} class_time={index} key={`class${index}`} />
+          <ClassCard id={String(index)} small classData={classData} class_time={index} key={`class${index}`} autoclose={autoclose} />
         )
       })}
     </div>

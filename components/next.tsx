@@ -1,5 +1,4 @@
 import ClassCard from "./classCard"
-import useSWR from "swr"
 import { useEffect, useState, useMemo, useRef } from "react"
 import { FiArrowDown } from 'react-icons/fi'
 
@@ -19,9 +18,11 @@ const useIntervalBy1s = (callback: () => any) => {
 };
 
 const Next = ({
-  data
+  data,
+  account
 }: {
   data: classData[] | undefined
+  account: account[] | undefined
 }) => {
   const [time, setTime] = useState(100000)
   const [nextTime, setNextTime] = useState(-1)
@@ -43,8 +44,6 @@ const Next = ({
     const minute = now.getMinutes()
     setTime(day * 24 * 60 + hour * 60 + minute)
   }, [])
-
-  const { data: account, error } = useSWR('/api/get-settings')
 
   const times = useMemo(() => {
     if (!account || !data) {
@@ -127,7 +126,7 @@ const Next = ({
       <div className="border border-gray-700 rounded-lg h-32 p-4 flex items-center justify-center">
         <p className="text-base text-center text-gray-400">Click cells in the timetable below to add class information.</p>
       </div> : 
-      <ClassCard classData={data[nextTime]} class_time={nextTime}/>
+      <ClassCard classData={data[nextTime]} class_time={nextTime} autoclose={account[0].autoclose}/>
       }
     </div>
     </>

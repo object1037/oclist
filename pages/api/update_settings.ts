@@ -15,7 +15,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       range_2,
       range_3,
       range_4,
-      range_5
+      range_5,
+      autoclose
     },
     method
   } = req
@@ -32,7 +33,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             range_2 = ${range_2},
             range_3 = ${range_3},
             range_4 = ${range_4},
-            range_5 = ${range_5}
+            range_5 = ${range_5},
+            autoclose = ${autoclose}
         where account_email = ${account_email};
         `
         const [rows, fields] = await conn.query(query.sql, query.values)

@@ -11,12 +11,14 @@ const ClassCard = ({
   classData,
   class_time,
   small,
-  id
+  id,
+  autoclose
 }: {
   classData: classData
   class_time: number
   small?: boolean
   id?: string
+  autoclose: 0 | 1
 }) => {
   let c_time_var = class_time
 
@@ -58,7 +60,9 @@ const ClassCard = ({
 
   function openWindow() {
     openedWindow = window.open(class_url)
-    sleep(10000).then(() => closeOpenedWindow())
+    if (autoclose) {
+      sleep(10000).then(() => closeOpenedWindow())
+    }
   }
 
   function closeOpenedWindow() {
