@@ -122,7 +122,7 @@ const SettingForm = ({
         <div className={clsx(sliderStyle)}/>
       </button>
     </div>
-    <button type='submit' form='settingForm' className="mt-12 border border-ppink-200 hover:bg-ppink-200 p-4 text-xl rounded-full transition" aria-label="done button">
+    <button disabled={submitting} type='submit' form='settingForm' className="mt-12 border border-ppink-200 hover:bg-ppink-200 p-4 text-xl rounded-full transition" aria-label="done button">
       {submitting ? <FiLoader className="animate-spin-slow" /> : <FiCheck />}
     </button>
     </>

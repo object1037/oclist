@@ -11,9 +11,7 @@ const Setting = ({
     )
   }
   return (
-    <div className='mx-6'>
-      <SettingForm data={data} />
-    </div>
+    <SettingForm data={data} />
   )
 }
 

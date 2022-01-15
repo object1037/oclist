@@ -125,36 +125,38 @@ const Profile = () => {
     </Head>
     <main>
       <Header image={session!.user!.image!} />
-      <div className='pt-10 pb-20 px-6 sm:px-12 max-w-5xl mx-auto'>
-        <h2 className='text-3xl font-bold mb-8'>Settings</h2>
-        <Setting data={data} />
-        <div className='mt-20'>
-          <h2 className='text-3xl font-bold mb-8'>Log out</h2>
-          <button onClick={() => mySignOut()} className='mx-6 border border-ppink-200 hover:bg-ppink-200 text-xl p-4 rounded-full transition' aria-label='Sign out button'>
-            {logouting ? <FiLoader className="animate-spin-slow" /> : <FiLogOut />}
-          </button>
-        </div>
-        <div className='mt-20'>
-          <h2 className='text-3xl font-bold mb-8'>Delete account</h2>
-          <button onClick={() => openModal()} className='mx-6 border border-ppink-200 hover:bg-ppink-200 text-xl p-4 rounded-full transition' aria-label='Delete account button'>
-            <FiTrash />
-          </button>
-          <Modal
-            isOpen={modalIsOpen}
-            onRequestClose={closeModal}
-            contentLabel="Modal"
-            className={clsx(modalStyle)}
-            overlayClassName={clsx(overlayStyle)}
-          >
-            <form onSubmit={submitHandler} className="flex flex-col items-center">
-              <p className={clsx(labelStyle)}>Are you sure?</p>
-              <p className='mb-2'>This action will delete your oclist account and its data.</p>
-              <p className='mb-10'>This will not affect your GitHub account.</p>
-              <button type='submit' className="border border-ppink-200 hover:bg-ppink-200 p-4 px-8 text-lg rounded-full transition" aria-label="done button">
-                <p>{deleting ? "Deleting..." : "Yes, delete my account"}</p>
-              </button>
-            </form>
-          </Modal>
+      <div className='pt-10 pb-20 px-6 sm:px-12'>
+        <div className='max-w-xl mx-auto'>
+          <h2 className='text-3xl font-bold mb-8'>Settings</h2>
+          <Setting data={data} />
+          <div className='mt-20'>
+            <h2 className='text-3xl font-bold mb-8'>Log out</h2>
+            <button onClick={() => mySignOut()} disabled={logouting} className='border border-ppink-200 hover:bg-ppink-200 text-xl p-4 rounded-full transition' aria-label='Sign out button'>
+              {logouting ? <FiLoader className="animate-spin-slow" /> : <FiLogOut />}
+            </button>
+          </div>
+          <div className='mt-20'>
+            <h2 className='text-3xl font-bold mb-8'>Delete account</h2>
+            <button onClick={() => openModal()} disabled={deleting} className='border border-ppink-200 hover:bg-ppink-200 text-xl p-4 rounded-full transition' aria-label='Delete account button'>
+              <FiTrash />
+            </button>
+            <Modal
+              isOpen={modalIsOpen}
+              onRequestClose={closeModal}
+              contentLabel="Modal"
+              className={clsx(modalStyle)}
+              overlayClassName={clsx(overlayStyle)}
+            >
+              <form onSubmit={submitHandler} className="flex flex-col items-center">
+                <p className={clsx(labelStyle)}>Are you sure?</p>
+                <p className='mb-2'>This action will delete your oclist account and its data.</p>
+                <p className='mb-10'>This will not affect your GitHub account.</p>
+                <button type='submit' disabled={deleting} className="border border-ppink-200 hover:bg-ppink-200 p-4 px-8 text-lg rounded-full transition" aria-label="done button">
+                  <p>{deleting ? "Deleting..." : "Yes, delete my account"}</p>
+                </button>
+              </form>
+            </Modal>
+          </div>
         </div>
       </div>
     </main>

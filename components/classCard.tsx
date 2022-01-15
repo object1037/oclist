@@ -179,7 +179,7 @@ const ClassCard = ({
       <input autoFocus id="class_title" type='text' name="class_title" value={class_title} onChange={(e) => setClass_title(e.target.value)} className={clsx(inputStyle)} />
       <label htmlFor="class_url" className={clsx(labelStyle)}>URL</label>
       <input id="class_url" type='url' name="class_url" value={class_url} onChange={(e) => setClass_url(e.target.value)} className={clsx(inputStyle)} />
-      <button type='submit' className="border border-ppink-200 hover:bg-ppink-200 mt-2 p-4 text-xl rounded-full transition" aria-label="done button">
+      <button disabled={submitting} type='submit' className="border border-ppink-200 hover:bg-ppink-200 mt-2 p-4 text-xl rounded-full transition" aria-label="done button">
         {submitting ? <FiLoader className="animate-spin-slow" /> : <FiCheck />}
       </button>
     </form>

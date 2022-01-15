@@ -32,7 +32,7 @@ const Next = ({
     const day = now.getDay() - 1
     const hour = now.getHours()
     const minute = now.getMinutes()
-    if (day * 24 * 60 + hour * 60 + minute > time) {
+    if (day * 24 * 60 + hour * 60 + minute !== time) {
       setTime(day * 24 * 60 + hour * 60 + minute)
     }
   })

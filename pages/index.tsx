@@ -51,7 +51,7 @@ const Home: NextPage = () => {
         <h1 className='text-5xl font-bold text-center mb-16'>oclist</h1>
         <p className='text-center text-lg text-gray-300 mb-6'>Manage all online class URLs in one place.</p>
         <p className='text-center text-gray-300 mb-10'>Please sign in or create an account with your GitHub account.</p>
-        <button onClick={() => mySignIn()} className='border border-ppink-200 hover:bg-ppink-200 text-xl mx-auto p-4 rounded-full transition' aria-label='Sign in button'>
+        <button onClick={() => mySignIn()} disabled={submitting} className='border border-ppink-200 hover:bg-ppink-200 text-xl mx-auto p-4 rounded-full transition' aria-label='Sign in button'>
           {submitting ? <FiLoader className="animate-spin-slow" /> : <FiLogIn />}
         </button>
       </main>
