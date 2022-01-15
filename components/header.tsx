@@ -13,7 +13,7 @@ const Header = ({
   return (
     <header className="flex justify-between items-center border-b border-gray-600 py-4 px-6 sm:px-12 h-20">
       <Link href='/'>
-        <a className="text-3xl font-bold p-3 hover:text-ppink-200 transition">
+        <a className="text-3xl font-bold p-3 -ml-3 hover:text-ppink-200 transition">
           <FiBook />
         </a>
       </Link>

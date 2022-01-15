@@ -106,7 +106,7 @@ const Next = ({
     return (
       <div className="flex flex-col max-w-xl mx-auto mb-6 lg:mb-12">
         <h2 className="font-bold text-3xl mb-6 flex justify-between items-center h-12">Next</h2>
-        <div className="animate-pulse bg-gray-800 rounded-lg h-32"></div>
+        <div className="animate-pulse bg-gray-800 rounded-xl h-32"></div>
       </div>
     )
   }

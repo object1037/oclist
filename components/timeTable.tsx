@@ -61,12 +61,12 @@ const TimeTable = ({
           return (
             <div className="contents" key={`loadingWeekDayandClass${index}`}>
               <div className={clsx(labelStyle, dayLabelStyle, (index / 6) === day && 'border border-ppink-200')}>{weekDays[index / 6]}</div>
-              <div className="animate-pulse bg-gray-800 rounded-lg h-32"></div>
+              <div className="animate-pulse bg-gray-800 rounded-xl h-32"></div>
             </div>
           )
         }
         return (
-          <div className="animate-pulse bg-gray-800 rounded-lg h-32" key={`loadingClass${index}`}></div>
+          <div className="animate-pulse bg-gray-800 rounded-xl h-32" key={`loadingClass${index}`}></div>
         )
       })}
     </div>
