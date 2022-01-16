@@ -123,7 +123,7 @@ const Next = ({
         }
       </div>
       {nextTime === -2 ? 
-      <div className="border border-gray-700 rounded-lg h-32 p-4 flex items-center justify-center">
+      <div className="border border-gray-700 rounded-xl h-32 p-4 flex items-center justify-center">
         <p className="text-base text-center text-gray-400">Click cells in the timetable below to add class information.</p>
       </div> : 
       <ClassCard classData={data[nextTime]} class_time={nextTime} autoclose={account[0].autoclose}/>
