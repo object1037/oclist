@@ -88,32 +88,32 @@ const SettingForm = ({
     <form onSubmit={submitHandler} className="flex flex-col items-center max-w-max px-6" id='settingForm'>
       <div className={clsx(inputWrapperStyle)}>
         <label htmlFor="range0" className={clsx(labelStyle)}>1</label>
-        <input id="range0" type='time' name="range0" value={range0} onChange={(e) => setRange0(e.target.value)} className={clsx(inputStyle)} />
+        <input id="range0" type='time' name="range0" value={range0} onChange={(e) => setRange0(e.target.value)} className={clsx(inputStyle)} required />
       </div>
 
       <div className={clsx(inputWrapperStyle)}>
         <label htmlFor="range1" className={clsx(labelStyle)}>2</label>
-        <input id="range1" type='time' min={range0} name="range1" value={range1} onChange={(e) => setRange1(e.target.value)} className={clsx(inputStyle)} />
+        <input id="range1" type='time' min={range0} name="range1" value={range1} onChange={(e) => setRange1(e.target.value)} className={clsx(inputStyle)} required />
       </div>
       
       <div className={clsx(inputWrapperStyle)}>
         <label htmlFor="range2" className={clsx(labelStyle)}>3</label>
-        <input id="range2" type='time' min={range1} name="range2" value={range2} onChange={(e) => setRange2(e.target.value)} className={clsx(inputStyle)} />
+        <input id="range2" type='time' min={range1} name="range2" value={range2} onChange={(e) => setRange2(e.target.value)} className={clsx(inputStyle)} required />
       </div>
       
       <div className={clsx(inputWrapperStyle)}>
         <label htmlFor="range3" className={clsx(labelStyle)}>4</label>
-        <input id="range3" type='time' min={range2} name="range3" value={range3} onChange={(e) => setRange3(e.target.value)} className={clsx(inputStyle)} />
+        <input id="range3" type='time' min={range2} name="range3" value={range3} onChange={(e) => setRange3(e.target.value)} className={clsx(inputStyle)} required />
       </div>
       
       <div className={clsx(inputWrapperStyle)}>
         <label htmlFor="range4" className={clsx(labelStyle)}>5</label>
-        <input id="range4" type='time' min={range3} name="range4" value={range4} onChange={(e) => setRange4(e.target.value)} className={clsx(inputStyle)} />
+        <input id="range4" type='time' min={range3} name="range4" value={range4} onChange={(e) => setRange4(e.target.value)} className={clsx(inputStyle)} required />
       </div>
       
       <div className={clsx(inputWrapperStyle)}>
         <label htmlFor="range5" className={clsx(labelStyle)}>6</label>
-        <input id="range5" type='time' min={range4} name="range5" value={range5} onChange={(e) => setRange5(e.target.value)} className={clsx(inputStyle)} />
+        <input id="range5" type='time' min={range4} name="range5" value={range5} onChange={(e) => setRange5(e.target.value)} className={clsx(inputStyle)} required />
       </div>
     </form>
     <h3 className='text-2xl font-semibold mb-6'>Tab autoclose</h3>
